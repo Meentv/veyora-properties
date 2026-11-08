@@ -52,10 +52,7 @@ export default function Home() {
               <span>Private viewings</span>
             </div>
 
-            <div className="hero-trust">
-              <ShieldCheck size={16}/>
-              <span>Viewings by appointment — enquire directly to arrange your visit.</span>
-            </div>
+
           </div>
 
           <div className="hero-visual">
@@ -185,8 +182,7 @@ export default function Home() {
         .hero-search .searchbar { flex:1; min-width:200px; }
         .hero-meta { display:flex; gap:8px; flex-wrap:wrap; font-size:12px; color:var(--color-muted); margin-top:12px; }
         .hero-meta strong { color: var(--color-forest); }
-        .hero-trust { display:flex; gap:8px; align-items:center; margin-top:16px; background:#E6F4EA; border:1px solid #A7D4B4; color:#1A6B4A; padding:10px 12px; border-radius:8px; font-size:13px; line-height:1.4; }
-        .hero-trust svg { color:#1A6B4A; flex:none; }
+
         .hero-visual { display:flex; flex-direction:column; gap:12px; min-width:0; }
         .hero-image-card { position:relative; border-radius: var(--radius-xl); overflow:hidden; aspect-ratio: 4/3; background: var(--color-forest); box-shadow: var(--shadow-lg); }
         .hero-image-card img { width:100%; height:100%; object-fit:cover; }
