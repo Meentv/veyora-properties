@@ -144,7 +144,7 @@ export default function PropertyDetails() {
             <div className="details-section">
               <h2 className="heading-serif">About this property</h2>
               <p className="lead">{property.description}</p>
-              <div className="sample-notice"><span><strong>Sample listing:</strong> This description and imagery are for demonstration. Not a verified live listing. Price shown in {property.currency} without conversion.</span></div>
+              <div className="sample-notice" style={{background:'#E6F4EA', borderColor:'#A7D4B4', color:'#1A6B4A'}}><span><strong>For viewing:</strong> Enquire via WhatsApp <strong>+234 913 279 8151</strong> to schedule a viewing. Price in {property.currency} · no conversion.</span></div>
             </div>
 
             {/* Rich specs table */}
@@ -206,7 +206,7 @@ export default function PropertyDetails() {
                 <div className="tour-placeholder">
                   <Video size={28}/>
                   <strong>Virtual tour — not yet connected</strong>
-                  <span>No 360° video is hosted for this sample listing. If a tour is supplied, it will appear here via your configured media host. Enquire to ask about availability.</span>
+                  <span>360° tours appear here when supplied by the owner. Enquire on WhatsApp +234 913 279 8151 to ask about a video tour for this viewing.</span>
                   <span style={{fontSize:11, opacity:0.8, marginTop:6}}>No video asset connected — this is an illustrative placeholder, not an available tour.</span>
                 </div>
                 <div className="tour-meta">

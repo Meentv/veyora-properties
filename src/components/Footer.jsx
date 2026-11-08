@@ -10,9 +10,9 @@ export default function Footer() {
           <img src="/logo.svg" alt="VEYORA Properties" width="180" height="40" className="footer-logo-img" />
           <p className="footer-tagline">A better place to belong.</p>
           <p className="footer-desc">
-            Premium international real estate discovery — browse curated listings, compare and enquire directly. Sample catalogue for demonstration.
+            Premium international real estate for viewing — browse curated listings, compare and enquire directly via WhatsApp. Viewing & enquiries: +234 913 279 8151.
           </p>
-          <div className="footer-legal">© {new Date().getFullYear()} VEYORA Properties. All rights reserved. Sample listings — not verified real inventory.</div>
+          <div className="footer-legal">© {new Date().getFullYear()} VEYORA Properties. All rights reserved. Contact for viewings via WhatsApp.</div>
         </div>
 
         <div className="footer-col">

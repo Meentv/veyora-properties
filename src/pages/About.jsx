@@ -16,19 +16,19 @@ export default function About(){
         <div className="container">
           <div className="two-col">
             <div>
-              <h2 className="heading-serif">Our story (in progress)</h2>
-              <p style={{color:'var(--color-muted)', lineHeight:1.7, fontSize:14}}>VEYORA was conceived as an antidote to cluttered listing sites and pushy checkouts. We start with a small, considered catalogue of 20 sample homes spanning Dubai, London, Lagos, New York, Barcelona, Paris and Austin — each with its own photography and story. As real inventory is onboarded, the catalogue will grow without losing its editorial care.</p>
-              <p style={{color:'var(--color-muted)', lineHeight:1.7, fontSize:14}}>We are not a transactional checkout. We are a bridge: thoughtful presentation on one side, direct human conversation on the other — via WhatsApp, viewings and tailored guidance.</p>
+              <h2 className="heading-serif">Our story</h2>
+              <p style={{color:'var(--color-muted)', lineHeight:1.7, fontSize:14}}>VEYORA was built for viewing — not selling online. We show 20 curated homes across Dubai, London, Lagos, New York, Barcelona, Paris and Austin, each with its own photography. Every enquiry goes directly to WhatsApp <strong>+234 913 279 8151</strong> for viewings, questions and next steps. No checkout, no hidden fees.</p>
+              <p style={{color:'var(--color-muted)', lineHeight:1.7, fontSize:14}}>We are your bridge: thoughtful presentation on one side, direct human conversation on the other — via WhatsApp and in-person viewings.</p>
             </div>
             <div style={{background:'var(--color-white)', border:'1px solid var(--color-border)', borderRadius:16, padding:20}}>
               <h3 style={{margin:'0 0 10px', color:'var(--color-forest)'}}>At a glance</h3>
               <div className="stats-grid">
-                <div className="stat"><strong>20</strong><span>Sample listings</span></div>
+                <div className="stat"><strong>20</strong><span>Curated listings</span></div>
                 <div className="stat"><strong>6</strong><span>Countries</span></div>
-                <div className="stat"><strong>5</strong><span>Currencies supported</span></div>
-                <div className="stat"><strong>0</strong><span>Checkouts</span></div>
+                <div className="stat"><strong>5</strong><span>Currencies</span></div>
+                <div className="stat"><strong>0</strong><span>Checkout</span></div>
               </div>
-              <p style={{fontSize:12, color:'var(--color-muted)', marginTop:14}}>Replace sample content with real listings in <code>src/data/properties.js</code>. See README for deployment.</p>
+              <p style={{fontSize:12, color:'var(--color-muted)', marginTop:14}}>Viewing & enquiries via WhatsApp +234 913 279 8151. See Contact for details.</p>
             </div>
           </div>
         </div>

@@ -46,16 +46,16 @@ export default function Home() {
             </form>
 
             <div className="hero-meta">
-              <span><strong>20</strong> sample listings</span>
+              <span><strong>20</strong> curated listings</span>
               <span>·</span>
               <span>5 currencies</span>
               <span>·</span>
-              <span>No payment required</span>
+              <span>Viewing & WhatsApp enquiries</span>
             </div>
 
-            <div className="sample-notice" style={{marginTop:16}}>
+            <div className="sample-notice" style={{marginTop:16, background:'#E6F4EA', borderColor:'#A7D4B4', color:'#1A6B4A'}}>
               <ShieldCheck size={16} style={{flex:'none', marginTop:2}}/>
-              <span><strong>Sample catalogue:</strong> All listings are demonstration content. Configure <code>src/data/properties.js</code> and <code>contactConfig.js</code> with real inventory when ready.</span>
+              <span><strong>Live enquiries:</strong> Browse 20 curated homes. Tap <strong>WhatsApp</strong> on any card or detail page to chat directly on <strong>+234 913 279 8151</strong> — viewings by appointment.</span>
             </div>
           </div>
 

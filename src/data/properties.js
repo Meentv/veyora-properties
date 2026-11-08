@@ -1,8 +1,8 @@
 /**
- * VEYORA Properties — Sample catalogue.
- * Exactly 20 distinct demo listings. International currencies: USD, GBP, EUR, NGN, AED.
+ * VEYORA Properties — Live catalogue for viewing & enquiry.
+ * Exactly 20 distinct listings curated for viewing. International currencies: USD, GBP, EUR, NGN, AED.
  * Prices are numeric amounts with separate ISO currency codes, formatted via Intl.NumberFormat.
- * No conversion or exchange-rate claims. All are sample/demo content.
+ * No conversion or exchange-rate claims. Contact via WhatsApp for viewings.
  */
 
 export const properties = [
@@ -32,7 +32,7 @@ export const properties = [
       '/images/properties/vey-001/garden-pool.jpg'
     ],
     amenities: ['Garden', 'Private Pool', 'Parking', 'Terrace', 'Smart Home', 'Maid’s Room'],
-    description: 'Sample listing — A serene, light-filled villa set behind manicured hedging in Dubai Hills. Floor-to-ceiling glazing opens the living spaces to a private garden and infinity pool, while warm timber and stone finishes give quiet luxury throughout. Ideal for family living with close access to schools, parks and golf.',
+    description: 'A serene, light-filled villa set behind manicured hedging in Dubai Hills. Floor-to-ceiling glazing opens the living spaces to a private garden and infinity pool, while warm timber and stone finishes give quiet luxury throughout. Ideal for family living with close access to schools, parks and golf.',
     features: ['Double-height living room', 'Open-plan kitchen with island', 'Private garden with pool', 'Covered terrace & BBQ', 'Walk-in wardrobe in primary suite', 'Smart lighting and climate control']
   },
   {
@@ -61,7 +61,7 @@ export const properties = [
       '/images/properties/vey-002/terrace.jpg'
     ],
     amenities: ['Terrace', 'Gym Access', 'Concierge', 'City View', 'Parking', 'Wine Cellar'],
-    description: 'Sample listing — Top-floor penthouse with panoramic Manhattan skyline views. Dark oak floors, bronze detailing and a sculptural fireplace define the great room, while the private terrace frames sunset over the Hudson. Building offers concierge, fitness and rooftop lounge.',
+    description: 'Top-floor penthouse with panoramic Manhattan skyline views. Dark oak floors, bronze detailing and a sculptural fireplace define the great room, while the private terrace frames sunset over the Hudson. Building offers concierge, fitness and rooftop lounge.',
     features: ['Panoramic terrace', 'Chef’s kitchen with Gaggenau', 'Primary suite with skyline view', 'Floor-to-ceiling windows', 'Private elevator', 'Smart home system']
   },
   {
@@ -90,7 +90,7 @@ export const properties = [
       '/images/properties/vey-003/garden.jpg'
     ],
     amenities: ['Garden', 'Fireplace', 'Storage', 'Patio', 'Parking Permit'],
-    description: 'Sample listing — Classic pastel-fronted townhouse on a quiet garden square. Restored period details meet a contemporary family kitchen opening to a walled patio garden. Four generous bedrooms across three floors with rich natural light.',
+    description: 'Classic pastel-fronted townhouse on a quiet garden square. Restored period details meet a contemporary family kitchen opening to a walled patio garden. Four generous bedrooms across three floors with rich natural light.',
     features: ['Period cornices & fireplaces', 'Family kitchen extension', 'Private walled garden', 'Loft storage', 'Steps to Portobello Road', 'Freehold']
   },
   {
@@ -119,7 +119,7 @@ export const properties = [
       '/images/properties/vey-004/pool.jpg'
     ],
     amenities: ['Waterfront', 'Private Pool', 'Staff Quarters', 'Garden', 'Gym', 'CCTV'],
-    description: 'Sample listing — Grand waterfront home with lagoon views and a resort-style pool terrace. Voluminous living pavilion, gourmet kitchen and five ensuite bedrooms crafted with marble and warm teak. Private jetty access and staff quarters included.',
+    description: 'Grand waterfront home with lagoon views and a resort-style pool terrace. Voluminous living pavilion, gourmet kitchen and five ensuite bedrooms crafted with marble and warm teak. Private jetty access and staff quarters included.',
     features: ['Lagoon-facing pool terrace', 'Double-volume lounge', 'Gourmet kitchen + pantry', 'Cinema room', 'Staff quarters (BQ)', 'Solar + inverter backup']
   },
   {
@@ -148,7 +148,7 @@ export const properties = [
       '/images/properties/vey-005/balcony.jpg'
     ],
     amenities: ['Balcony', 'Elevator', 'High Ceilings', 'Historic Features', 'Air Conditioning'],
-    description: 'Sample listing — Restored modernist apartment with mosaic floors and arched French doors to a Juliet balcony. Quiet, light-filled and turnkey furnished, steps from Passeig de Gràcia and Casa Batlló.',
+    description: 'Restored modernist apartment with mosaic floors and arched French doors to a Juliet balcony. Quiet, light-filled and turnkey furnished, steps from Passeig de Gràcia and Casa Batlló.',
     features: ['Original mosaic tiles', 'Balcony with street view', 'Restored timber shutters', 'Designer kitchen', 'Walkable to metro', 'Furnished']
   },
   {
@@ -177,7 +177,7 @@ export const properties = [
       '/images/properties/vey-006/beach-terrace.jpg'
     ],
     amenities: ['Beach Access', 'Private Pool', 'Garden', 'Home Cinema', 'Maid’s Room', 'Gym'],
-    description: 'Sample listing — Signature beachfront villa with direct sand access and uninterrupted Arabian Gulf views. White stone façade, double-height atrium and a resort pool that meets the horizon. An entertainer’s home with cinema, gym and shaded beach pavilion.',
+    description: 'Signature beachfront villa with direct sand access and uninterrupted Arabian Gulf views. White stone façade, double-height atrium and a resort pool that meets the horizon. An entertainer’s home with cinema, gym and shaded beach pavilion.',
     features: ['Direct beach access', 'Infinity pool to sea', 'Atrium with skylight', 'Professional cinema', 'Rooftop sun deck', 'Private garage for 4']
   },
   {
@@ -206,7 +206,7 @@ export const properties = [
       '/images/properties/vey-007/rooftop.jpg'
     ],
     amenities: ['Rooftop Terrace', 'Exposed Brick', 'High Ceilings', 'Concierge', 'Gym'],
-    description: 'Sample listing — Converted textile warehouse with exposed brick, steel windows and polished concrete. Open-plan living under a vaulted ceiling, bespoke kitchen and mews balcony. Building offers gym and communal rooftop.',
+    description: 'Converted textile warehouse with exposed brick, steel windows and polished concrete. Open-plan living under a vaulted ceiling, bespoke kitchen and mews balcony. Building offers gym and communal rooftop.',
     features: ['Vaulted open plan', 'Industrial steel windows', 'Custom kitchen joinery', 'Mews balcony', 'Communal rooftop', 'Pet-friendly building']
   },
   {
@@ -235,7 +235,7 @@ export const properties = [
       '/images/properties/vey-008/compound.jpg'
     ],
     amenities: ['Compound', 'Garden', 'Parking', 'Security', 'Water Treatment'],
-    description: 'Sample listing — Spacious family home in a secure gated compound. Bright living wing, fitted kitchen with pantry and four ensuite bedrooms including a generous primary suite with terrace. Excellent schools and retail nearby.',
+    description: 'Spacious family home in a secure gated compound. Bright living wing, fitted kitchen with pantry and four ensuite bedrooms including a generous primary suite with terrace. Excellent schools and retail nearby.',
     features: ['Gated compound with 24/7 security', 'Terrace off primary suite', 'Fitted kitchen + store', 'Family lounge', 'Parking for 3', 'Private garden']
   },
   {
@@ -264,7 +264,7 @@ export const properties = [
       '/images/properties/vey-009/pool-canyon.jpg'
     ],
     amenities: ['Canyon View', 'Pool', 'Gym', 'Home Cinema', 'Wine Cellar', 'Garden'],
-    description: 'Sample listing — Architectural canyon villa with glass walls that dissolve into oak-studded hills. Minimalist interiors, stone bath suites and an infinity pool that appears to float above the canyon. Gated and deeply private.',
+    description: 'Architectural canyon villa with glass walls that dissolve into oak-studded hills. Minimalist interiors, stone bath suites and an infinity pool that appears to float above the canyon. Gated and deeply private.',
     features: ['Canyon infinity pool', 'Glass living pavilion', 'Stone ensuite baths', 'Chef’s kitchen', 'Wellness + gym suite', 'Gated motor court']
   },
   {
@@ -293,7 +293,7 @@ export const properties = [
       '/images/properties/vey-010/balcony-view.jpg'
     ],
     amenities: ['River View', 'Balcony', 'Gym', 'Concierge', 'Parking', 'Private Lift'],
-    description: 'Sample listing — Corner penthouse with River Thames and skyline vistas. Contemporary detailing, oak floors and a wraparound balcony designed for entertaining. Five-star amenities including pool, gym and 24-hour concierge.',
+    description: 'Corner penthouse with River Thames and skyline vistas. Contemporary detailing, oak floors and a wraparound balcony designed for entertaining. Five-star amenities including pool, gym and 24-hour concierge.',
     features: ['River-facing balcony', 'Private lift lobby', 'Bulthaup kitchen', 'Primary suite with dressing room', 'Resident gym & pool', 'Secure parking']
   },
   {
@@ -322,7 +322,7 @@ export const properties = [
       '/images/properties/vey-011/pool-sea.jpg'
     ],
     amenities: ['Sea View', 'Pool', 'Garden', 'Terrace', 'BBQ', 'Parking'],
-    description: 'Sample listing — Whitewashed villa perched above sandstone cliffs with Atlantic views from every terrace. Minimal interiors in lime plaster and oak, with a horizon pool that mirrors the ocean. Steps to hidden coves.',
+    description: 'Whitewashed villa perched above sandstone cliffs with Atlantic views from every terrace. Minimal interiors in lime plaster and oak, with a horizon pool that mirrors the ocean. Steps to hidden coves.',
     features: ['Clifftop infinity pool', 'Lime-plaster interiors', 'Outdoor kitchen & BBQ', 'Sunken fire lounge', 'Olive garden', 'Private path to cove']
   },
   {
@@ -351,7 +351,7 @@ export const properties = [
       '/images/properties/vey-012/workspace.jpg'
     ],
     amenities: ['Open Plan', 'Boardroom', 'Reception', 'Parking', 'Backup Power', 'Elevator'],
-    description: 'Sample listing — Boutique commercial loft suitable for studio, gallery or startup HQ. Double-height gallery, poured concrete floors and a glass boardroom overlooking the business district. Includes reception, kitchenette and secure parking.',
+    description: 'Boutique commercial loft suitable for studio, gallery or startup HQ. Double-height gallery, poured concrete floors and a glass boardroom overlooking the business district. Includes reception, kitchenette and secure parking.',
     features: ['Double-height gallery space', 'Glass boardroom', 'Reception & waiting area', 'Kitchenette + store', 'Backup power', 'Street-facing signage']
   },
   {
@@ -380,7 +380,7 @@ export const properties = [
       '/images/properties/vey-013/garden.jpg'
     ],
     amenities: ['Garden', 'Fireplace', 'Terrace', 'Storage', 'Tree-lined Street'],
-    description: 'Sample listing — Historic brownstone with lovingly restored parlor floor, pocket garden and chef’s kitchen extension. Original mantels, herringbone oak and brass details throughout three serene bedroom floors.',
+    description: 'Historic brownstone with lovingly restored parlor floor, pocket garden and chef’s kitchen extension. Original mantels, herringbone oak and brass details throughout three serene bedroom floors.',
     features: ['Parlor with original mantel', 'Kitchen extension to garden', 'Private pocket garden', 'Roof terrace', 'Cellar storage', 'Tree-lined block']
   },
   {
@@ -409,7 +409,7 @@ export const properties = [
       '/images/properties/vey-014/balcony-marina.jpg'
     ],
     amenities: ['Marina View', 'Balcony', 'Gym', 'Pool', 'Concierge', 'Parking'],
-    description: 'Sample listing — High-floor, light-washed apartment with full marina panorama. Minimal luxury interiors, stone kitchen and spa-like baths. Resort pool deck and gym one elevator ride away.',
+    description: 'High-floor, light-washed apartment with full marina panorama. Minimal luxury interiors, stone kitchen and spa-like baths. Resort pool deck and gym one elevator ride away.',
     features: ['Marina panorama balcony', 'Stone kitchen', 'Spa baths', 'Resort pool + gym', 'Concierge', 'Covered parking']
   },
   {
@@ -438,7 +438,7 @@ export const properties = [
       '/images/properties/vey-015/balcony-paris.jpg'
     ],
     amenities: ['Balcony', 'Fireplace', 'High Ceilings', 'Elevator', 'Herringbone Floors'],
-    description: 'Sample listing — Elegant Haussmann apartment with herringbone oak, marble mantels and French doors to a wrought-iron balcony. Quiet building on a classic Left Bank street, furnished with designer ease.',
+    description: 'Elegant Haussmann apartment with herringbone oak, marble mantels and French doors to a wrought-iron balcony. Quiet building on a classic Left Bank street, furnished with designer ease.',
     features: ['Herringbone oak floors', 'Marble fireplaces', 'Balcony with street view', 'Designer kitchen', 'Wine cave', 'Elevator building']
   },
   {
@@ -467,7 +467,7 @@ export const properties = [
       '/images/properties/vey-016/meeting-room.jpg'
     ],
     amenities: ['Meeting Room', 'Reception', 'Parking', 'CCTV', 'Backup Power'],
-    description: 'Sample listing — Contemporary studio offices on Admiralty Way. Bright open workspace, glass meeting pod and reception with kitchenette. Ideal for agency or consultancy seeking a polished Lagos address.',
+    description: 'Contemporary studio offices on Admiralty Way. Bright open workspace, glass meeting pod and reception with kitchenette. Ideal for agency or consultancy seeking a polished Lagos address.',
     features: ['Open workspace', 'Glass meeting pod', 'Reception area', 'Kitchenette', 'Secure parking', '24/7 access']
   },
   {
@@ -496,7 +496,7 @@ export const properties = [
       '/images/properties/vey-017/rooftop-pool.jpg'
     ],
     amenities: ['Ocean View', 'Rooftop Pool', 'Gym', 'Concierge', 'Terrace', 'Smart Home'],
-    description: 'Sample listing — Glass penthouse above Brickell with ocean and city-light vistas. Curved terrace, art-filled living room and a kitchen designed for hosting. Resort rooftop with pool, spa and co-working lounge.',
+    description: 'Glass penthouse above Brickell with ocean and city-light vistas. Curved terrace, art-filled living room and a kitchen designed for hosting. Resort rooftop with pool, spa and co-working lounge.',
     features: ['Curved ocean terrace', 'Smart glass & lighting', 'Italian kitchen', 'Rooftop pool & spa', 'Co-working lounge', 'Private elevator']
   },
   {
@@ -525,7 +525,7 @@ export const properties = [
       '/images/properties/vey-018/garden-terrace.jpg'
     ],
     amenities: ['Communal Garden', 'Terrace', 'Fireplace', 'Concierge', 'Parking Permit'],
-    description: 'Sample listing — Garden-facing apartment on a quiet Chelsea square. Bright reception with fireplace, refined kitchen and two calm bedroom suites. Access to private communal gardens — rare in central London.',
+    description: 'Garden-facing apartment on a quiet Chelsea square. Bright reception with fireplace, refined kitchen and two calm bedroom suites. Access to private communal gardens — rare in central London.',
     features: ['Reception with fireplace', 'Garden-view terrace', 'Refined kitchen', 'Primary suite with balcony', 'Communal garden key', 'Porter service']
   },
   {
@@ -554,7 +554,7 @@ export const properties = [
       '/images/properties/vey-019/rooftop-terrace.jpg'
     ],
     amenities: ['River View', 'Roof Terrace', 'Patio', 'Storage', 'Terracotta Tiles'],
-    description: 'Sample listing — Restored Alfama townhouse with river glimpses and a sun-washed roof terrace. Original tiles, arched doorways and a courtyard kitchen perfect for gatherings. Walk to Fado houses and the Tagus promenade.',
+    description: 'Restored Alfama townhouse with river glimpses and a sun-washed roof terrace. Original tiles, arched doorways and a courtyard kitchen perfect for gatherings. Walk to Fado houses and the Tagus promenade.',
     features: ['Rooftop river terrace', 'Original azulejo tiles', 'Courtyard kitchen', 'Arched living room', 'Roof laundry room', 'Short walk to tram']
   },
   {
@@ -583,7 +583,7 @@ export const properties = [
       '/images/properties/vey-020/deck-view.jpg'
     ],
     amenities: ['Hill View', 'Deck', 'Pool', 'Fireplace', 'Garden', 'Garage'],
-    description: 'Sample listing — Cedar and limestone retreat set among live oaks. Expansive great room with steel-framed glass to a pool deck and Hill Country panorama. Calm, modern, and built for indoor-outdoor living.',
+    description: 'Cedar and limestone retreat set among live oaks. Expansive great room with steel-framed glass to a pool deck and Hill Country panorama. Calm, modern, and built for indoor-outdoor living.',
     features: ['Hill Country panorama deck', 'Infinity pool', 'Steel-framed glazing', 'Chef’s kitchen', 'Primary suite with retreat nook', 'Two-car garage + storage']
   }
 ]

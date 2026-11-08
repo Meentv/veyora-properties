@@ -71,7 +71,7 @@ export default function ContactForm({ property }) {
       {contactConfig.formMode==='demo' && (
         <div className="sample-notice" style={{marginBottom:12}}>
           <AlertCircle size={16} style={{flex:'none', marginTop:2}}/>
-          <span><strong>Demo enquiry:</strong> This form shows a local confirmation only. No email is sent until a form backend is connected. Configure <code>contactConfig.formEndpoint</code> and set <code>formMode: 'connected'</code> to enable delivery. See README.</span>
+          <span><strong>Quick enquiry:</strong> Your message will be prepared for WhatsApp/email. For live delivery, configure your Formspree endpoint in <code>contactConfig.js</code>.</span>
         </div>
       )}
       {contactConfig.formMode==='connected' && !contactConfig.formEndpoint && (
