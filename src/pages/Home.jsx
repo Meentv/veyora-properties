@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, ShieldCheck, Globe, Award, Search, Building2, Home as HomeIcon, Landmark, Waves, Store } from 'lucide-react'
 import { properties, getFeatured, getPropertyById } from '../data/properties'
-import PropertyCard from '../components/PropertyCard'
+import PropertySlider from '../components/PropertySlider'
 import SearchBar from '../components/SearchBar'
 import { useState } from 'react'
 import { formatPrice } from '../utils/formatPrice'
@@ -99,19 +99,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED */}
+      {/* FEATURED SLIDER */}
       <section className="section">
         <div className="container">
           <div className="section-head">
             <div>
-              <div className="eyebrow">CURATED SELECTION</div>
+              <div className="eyebrow">CURATED SELECTION — SLIDE TO EXPLORE</div>
               <h2 className="heading-serif">Featured properties</h2>
+              <p style={{fontSize:13, color:'var(--color-muted)', margin:'6px 0 0'}}>Swipe or use arrows to slide through featured homes. All 20 are also in the 5×4 catalogue below.</p>
             </div>
             <Link to="/properties" className="btn btn-primary btn-sm">Explore catalogue</Link>
           </div>
-          <div className="properties-grid">
-            {featured.map(p => <PropertyCard key={p.id} property={p} />)}
+          <PropertySlider properties={featured} title="Featured — slide through" />
+        </div>
+      </section>
+
+      {/* ALL PROPERTIES SLIDER — viewers can slide through all 20 */}
+      <section className="section section-light">
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow">ALL 20 — SLIDE THROUGH</div>
+              <h2 className="heading-serif">Slide through all properties</h2>
+              <p style={{fontSize:13, color:'var(--color-muted)', margin:'6px 0 0'}}>Horizontal slide with touch swipe + arrow controls. Prefer grid? <Link to="/properties" style={{fontWeight:600, color:'var(--color-forest)'}}>Open grid view</Link></p>
+            </div>
           </div>
+          <PropertySlider properties={properties} title="All 20 properties — slide" autoPlay={false} />
         </div>
       </section>
 
