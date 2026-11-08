@@ -16,11 +16,7 @@ export default function Navbar() {
     <header className="navbar">
       <div className="container navbar-inner">
         <Link to="/" className="brand" aria-label="VEYORA Properties home">
-          <div className="brand-mark">V</div>
-          <div className="brand-text">
-            <span className="brand-name">VEYORA</span>
-            <span className="brand-sub">PROPERTIES</span>
-          </div>
+          <img src="/logo.svg" alt="VEYORA Properties" width="160" height="36" className="brand-logo" />
         </Link>
 
         <nav className="nav-links" aria-label="Primary">
@@ -79,16 +75,8 @@ export default function Navbar() {
           display:flex; align-items:center; justify-content:space-between;
           gap:16px; height:68px;
         }
-        .brand { display:flex; align-items:center; gap:12px; }
-        .brand-mark {
-          width:40px; height:40px; border-radius:10px;
-          background: var(--color-forest); color: var(--color-gold);
-          display:grid; place-items:center;
-          font-family: var(--font-serif); font-weight:700; font-size:20px;
-        }
-        .brand-text { display:flex; flex-direction:column; line-height:1; }
-        .brand-name { font-family: var(--font-serif); font-weight:700; letter-spacing:0.08em; font-size:17px; color:var(--color-forest); }
-        .brand-sub { font-size:10px; letter-spacing:0.22em; color: var(--color-muted); font-weight:600; margin-top:2px; }
+        .brand { display:flex; align-items:center; }
+        .brand-logo { height:36px; width:auto; display:block; }
 
         .nav-links { gap:22px; align-items:center; }
         .nav-link { font-size:14px; font-weight:500; color: var(--color-charcoal); padding:6px 2px; position:relative; }

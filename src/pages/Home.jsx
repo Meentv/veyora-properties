@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, ShieldCheck, Globe, Award, Search, Building2, Home as HomeIcon, Landmark, Waves, Store } from 'lucide-react'
-import { properties, getFeatured } from '../data/properties'
+import { properties, getFeatured, getPropertyById } from '../data/properties'
 import PropertyCard from '../components/PropertyCard'
 import SearchBar from '../components/SearchBar'
 import { useState } from 'react'
@@ -18,6 +18,8 @@ export default function Home() {
     e.preventDefault()
     if (q.trim()) navigate(`/properties?search=${encodeURIComponent(q.trim())}`)
   }
+
+  const heroProperty = getPropertyById('VEY-001')
 
   const categories = [
     { icon: Building2, label:'Apartments', type:'apartment', count: properties.filter(p=>p.propertyType==='apartment').length },
@@ -59,13 +61,13 @@ export default function Home() {
 
           <div className="hero-visual">
             <div className="hero-image-card">
-              <img src="/images/properties/vey-001/exterior.jpg" alt="Contemporary Garden Villa — featured" width={640} height={480} onError={e=>e.currentTarget.style.display='none'} />
+              <img src={heroProperty.images[0]} alt={`${heroProperty.title} — featured`} width={640} height={480} onError={e=>e.currentTarget.style.display='none'} />
               <div className="hero-image-overlay">
                 <div className="overlay-card">
-                  <div className="overlay-eyebrow">Featured — Dubai Hills</div>
-                  <div className="overlay-title">Contemporary Garden Villa</div>
-                  <div className="overlay-price">{formatPrice(4850000,'AED')} · For Sale</div>
-                  <Link to="/properties/VEY-001" className="btn btn-white btn-sm">View Details <ArrowRight size={14}/></Link>
+                  <div className="overlay-eyebrow">Featured — {heroProperty.location.area}</div>
+                  <div className="overlay-title">{heroProperty.title}</div>
+                  <div className="overlay-price">{formatPrice(heroProperty.price, heroProperty.currency)} · {heroProperty.listingType === 'sale' ? 'For Sale' : 'For Rent'}</div>
+                  <Link to={`/properties/${heroProperty.id}`} className="btn btn-white btn-sm">View Details <ArrowRight size={14}/></Link>
                 </div>
               </div>
             </div>

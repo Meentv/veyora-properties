@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
 import { contactConfig } from '../data/contactConfig'
 
 export default function ContactForm({ property }) {
   const [form, setForm] = useState({ name:'', email:'', phone:'', method:'email', message: property ? `Hello, I am interested in ${property.title} (${property.id}). Please share more details.` : '' })
   const [errors, setErrors] = useState({})
-  const [status, setStatus] = useState(null) // 'success' | 'error'
+  const [status, setStatus] = useState(null) // 'success' | 'error' | 'sending'
+  const [statusMessage, setStatusMessage] = useState('')
 
   const validate = () => {
     const e={}
@@ -16,25 +17,67 @@ export default function ContactForm({ property }) {
     return e
   }
 
-  const onSubmit = (ev) => {
+  const onSubmit = async (ev) => {
     ev.preventDefault()
     const v=validate()
     setErrors(v)
-    if(Object.keys(v).length) { setStatus('error'); return }
-    // Demo mode — no backend
+    if(Object.keys(v).length) { setStatus('error'); setStatusMessage('Please correct the highlighted fields.'); return }
+
+    // Connected mode: actually POST to configured endpoint
+    if (contactConfig.formMode === 'connected' && contactConfig.formEndpoint) {
+      setStatus('sending')
+      setStatusMessage('Sending your enquiry...')
+      try {
+        const payload = {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          preferredContact: form.method,
+          message: form.message,
+          propertyId: property?.id || null,
+          propertyTitle: property?.title || null,
+          propertyLocation: property ? `${property.location.area}, ${property.location.city}, ${property.location.country}` : null,
+          submittedAt: new Date().toISOString()
+        }
+        const res = await fetch(contactConfig.formEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        if (!res.ok) {
+          const text = await res.text().catch(()=> '')
+          throw new Error(text || `Request failed with ${res.status}`)
+        }
+        setStatus('success')
+        setStatusMessage(`Thank you, ${form.name.split(' ')[0] || 'there'}! Your enquiry for ${property ? `${property.title} (${property.id})` : 'VEYORA Properties'} was sent to ${contactConfig.email || 'the configured endpoint'}. We’ll respond via your preferred contact (${form.method}).`)
+        return
+      } catch (err) {
+        setStatus('error')
+        setStatusMessage(`Could not send enquiry: ${err.message}. Please try again or contact via WhatsApp using the button above. No payment is required.`)
+        return
+      }
+    }
+
+    // Demo mode: no backend — clearly explain no message sent
     setStatus('success')
-    // In a real app, would POST to contactConfig.formEndpoint
+    setStatusMessage(`Thank you, ${form.name.split(' ')[0] || 'there'}! This is a demo — no message was sent. To enable real delivery, set contactConfig.formMode to 'connected' and add your formEndpoint (e.g. Formspree). Until then, use WhatsApp on the property page for a real enquiry.`)
   }
 
   return (
     <form className="contact-form" onSubmit={onSubmit} noValidate>
       <h3>{property ? `Enquire about ${property.title}` : 'Send an enquiry'}</h3>
-      {property && <p className="form-ref">Reference: <strong>{property.id}</strong> · {property.location.city}</p>}
+      {property && <p className="form-ref">Reference: <strong>{property.id}</strong> · {property.location.city} · <strong>{property.location.country}</strong></p>}
 
       {contactConfig.formMode==='demo' && (
         <div className="sample-notice" style={{marginBottom:12}}>
           <AlertCircle size={16} style={{flex:'none', marginTop:2}}/>
-          <span><strong>Demo enquiry:</strong> This form shows a success message locally. No email is sent until a form backend is connected. Configure <code>contactConfig.formEndpoint</code> to enable delivery. See README.</span>
+          <span><strong>Demo enquiry:</strong> This form shows a local confirmation only. No email is sent until a form backend is connected. Configure <code>contactConfig.formEndpoint</code> and set <code>formMode: 'connected'</code> to enable delivery. See README.</span>
+        </div>
+      )}
+      {contactConfig.formMode==='connected' && !contactConfig.formEndpoint && (
+        <div className="sample-notice" style={{marginBottom:12, background:'#fdecea', borderColor:'#fca5a5'}}>
+          <AlertCircle size={16} style={{flex:'none', marginTop:2}}/>
+          <span><strong>Configuration error:</strong> formMode is 'connected' but formEndpoint is empty. Add your Formspree/Netlify URL in <code>src/data/contactConfig.js</code>.</span>
         </div>
       )}
 
@@ -73,15 +116,15 @@ export default function ContactForm({ property }) {
         {errors.message && <em className="err">{errors.message}</em>}
       </label>
 
-      <button type="submit" className="btn btn-primary" style={{width:'100%', marginTop:4}}>
-        <Send size={16}/> Request viewing / Send enquiry
+      <button type="submit" className="btn btn-primary" style={{width:'100%', marginTop:4}} disabled={status==='sending'}>
+        {status==='sending' ? <><Loader2 size={16} style={{animation:'spin 1s linear infinite'}}/> Sending...</> : <><Send size={16}/> Request viewing / Send enquiry</>}
       </button>
 
       {status==='success' && (
-        <div className="form-success"><CheckCircle size={16}/> Thank you, {form.name.split(' ')[0] || 'there'}! Your enquiry has been recorded as a demo. We’ll explain how to connect a real backend in the confirmation.</div>
+        <div className="form-success"><CheckCircle size={16}/> {statusMessage}</div>
       )}
-      {status==='error' && Object.keys(errors).length>0 && (
-        <div className="form-error"><AlertCircle size={16}/> Please correct the highlighted fields.</div>
+      {status==='error' && (
+        <div className="form-error"><AlertCircle size={16}/> {statusMessage}</div>
       )}
 
       <style>{`
@@ -105,8 +148,9 @@ export default function ContactForm({ property }) {
         .contact-form input[aria-invalid="true"], .contact-form textarea[aria-invalid="true"] { border-color: var(--color-error); }
         .opt { font-weight:400; color: var(--color-muted); }
         .err { font-weight:400; color: var(--color-error); font-size:12px; font-style:normal; }
-        .form-success { margin-top:12px; background:#e6f4ea; color:#1a6b4a; padding:10px 12px; border-radius:8px; font-size:13px; display:flex; gap:8px; align-items:center; }
-        .form-error { margin-top:12px; background:#fdecea; color:#b42318; padding:10px 12px; border-radius:8px; font-size:13px; display:flex; gap:8px; align-items:center; }
+        .form-success { margin-top:12px; background:#e6f4ea; color:#1a6b4a; padding:10px 12px; border-radius:8px; font-size:13px; display:flex; gap:8px; align-items:flex-start; line-height:1.5; }
+        .form-error { margin-top:12px; background:#fdecea; color:#b42318; padding:10px 12px; border-radius:8px; font-size:13px; display:flex; gap:8px; align-items:flex-start; line-height:1.5; }
+        @keyframes spin { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }
       `}</style>
     </form>
   )
