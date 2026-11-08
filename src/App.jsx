@@ -14,6 +14,7 @@ import NotFound from './pages/NotFound'
 import { FavoritesProvider } from './context/FavoritesContext'
 import { CompareProvider } from './context/CompareContext'
 import { RecentlyViewedProvider } from './context/RecentlyViewedContext'
+import { ThemeProvider } from './context/ThemeContext'
 
 function ScrollToTop(){
   const { pathname } = useLocation()
@@ -23,10 +24,11 @@ function ScrollToTop(){
 
 export default function App(){
   return (
-    <FavoritesProvider>
-      <CompareProvider>
-        <RecentlyViewedProvider>
-          <BrowserRouter>
+    <ThemeProvider>
+      <FavoritesProvider>
+        <CompareProvider>
+          <RecentlyViewedProvider>
+            <BrowserRouter>
             <ScrollToTop />
             <div className="app">
               <Navbar />
@@ -49,5 +51,6 @@ export default function App(){
         </RecentlyViewedProvider>
       </CompareProvider>
     </FavoritesProvider>
+    </ThemeProvider>
   )
 }
