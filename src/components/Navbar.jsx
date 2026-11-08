@@ -63,8 +63,8 @@ export default function Navbar() {
             </div>
             <button onClick={toggle} className="btn btn-outline theme-toggle-mobile">{theme==='light' ? <Moon size={14}/> : <Sun size={14}/>} {theme==='light' ? 'Dark mode' : 'Light mode'} (auto day/night)</button>
             <div className="mobile-contact">
-              <span><Mail size={14}/> Email via contact form</span>
-              <span><Phone size={14}/> WhatsApp via property pages</span>
+              <a href="mailto:alameenahmed588@gmail.com"><Mail size={14}/> alameenahmed588@gmail.com</a>
+              <a href="tel:+2349132798151"><Phone size={14}/> +234 913 279 8151</a>
             </div>
           </div>
         </div>
@@ -115,11 +115,11 @@ export default function Navbar() {
           padding: 16px 0 20px;
         }
         .mobile-drawer .theme-toggle-mobile { margin-top:10px; width:100%; justify-content:center; }
-        .mobile-drawer-inner { display:flex; flex-direction:column; gap:12px; }
-        .mobile-drawer-inner a { padding:10px 0; font-weight:500; border-bottom:1px solid #f0ece3; }
+        .mobile-drawer-inner { display:flex; flex-direction:column; gap:2px; }
+        .mobile-drawer-inner a { padding:12px 0; font-weight:500; border-bottom:1px solid #f0ece3; min-height:44px; display:flex; align-items:center; }
         .mobile-actions { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px; }
-        .mobile-contact { display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--color-muted); margin-top:6px; }
-        .mobile-contact span { display:flex; gap:8px; align-items:center; }
+        .mobile-contact { display:flex; flex-direction:column; gap:8px; font-size:13px; color:var(--color-muted); margin-top:12px; padding-top:12px; border-top:1px solid var(--color-border); }
+        .mobile-contact a { display:flex; gap:8px; align-items:center; padding:0; border:none; color:var(--color-forest); font-weight:500; }
       `}</style>
     </header>
   )

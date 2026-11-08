@@ -25,10 +25,8 @@ export default function Properties() {
     availability: 'all',
     sort: 'newest'
   })
-  const [visibleCount, setVisibleCount] = useState(20)
   const [showFilters, setShowFilters] = useState(false)
 
-  // sync initial type changes
   useEffect(()=>{ if(initialType!=='all') setFilters(f=>({...f, propertyType: initialType})) },[initialType])
   useEffect(()=>{ if(initialSearch) setSearch(initialSearch) },[initialSearch])
 
@@ -65,7 +63,6 @@ export default function Properties() {
     return res
   }, [search, filters])
 
-  const visible = filtered.slice(0, visibleCount)
   const { compareIds } = useCompare()
 
   const clearAll = () => {
@@ -75,7 +72,6 @@ export default function Properties() {
       minPrice:'', maxPrice:'', minBeds:'', minBaths:'',
       availability:'all', sort:'newest'
     })
-    setVisibleCount(20)
   }
 
   return (
@@ -83,9 +79,9 @@ export default function Properties() {
       <div className="container">
         <div className="page-head">
           <div>
-            <div className="eyebrow">CATALOGUE · 20 SAMPLE LISTINGS</div>
+            <div className="eyebrow">OUR COLLECTION</div>
             <h1 className="heading-serif">All properties</h1>
-            <p>On wide desktop this catalogue is a 5 × 4 grid (20 cards). It adapts responsively to tablet and phone without horizontal overflow.</p>
+            <p>Eight exclusive homes across six countries — displayed in a 4 × 2 gallery on large screens and adapting gracefully to tablet and mobile.</p>
           </div>
           <div className="page-head-actions">
             <div className="head-search">
@@ -96,8 +92,8 @@ export default function Properties() {
         </div>
 
         <div className="results-bar">
-          <span><strong>{filtered.length}</strong> {filtered.length===1?'result':'results'} {search && <>for “{search}”</>}</span>
-          {compareIds.length>=2 && <span className="compare-hint">Compare {compareIds.length} selected — scroll to table</span>}
+          <span><strong>{filtered.length}</strong> {filtered.length===1?'property':'properties'} {search && <>for “{search}”</>}</span>
+          {compareIds.length>=2 && <span className="compare-hint">Compare {compareIds.length} selected — see table below</span>}
         </div>
 
         <div className="filter-layout">
@@ -113,15 +109,8 @@ export default function Properties() {
           </div>
 
           <div className="grid-col">
-            <PropertyGrid properties={visible} />
+            <PropertyGrid properties={filtered} />
 
-            {visible.length < filtered.length && (
-              <div style={{textAlign:'center', marginTop:20}}>
-                <button className="btn btn-outline" onClick={()=>setVisibleCount(c=>c+8)}>Load more ({filtered.length - visible.length} remaining)</button>
-              </div>
-            )}
-
-            {/* Compare table */}
             {compareIds.length>=2 && (
               <div id="compare-table" className="compare-table-wrap">
                 <h3 className="heading-serif" style={{marginTop:28}}>Compare properties</h3>
@@ -159,7 +148,7 @@ export default function Properties() {
         .page-head h1 { margin:6px 0 6px; font-size:30px; }
         .page-head p { color: var(--color-muted); font-size:14px; max-width:720px; line-height:1.6; margin:0; }
         .page-head-actions { margin-top:14px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-        .head-search { flex:1; max-width:560px; min-width:260px; }
+        .head-search { flex:1; max-width:560px; min-width:200px; }
         .results-bar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:14px 0; border-bottom:1px solid var(--color-border); margin:14px 0 18px; font-size:13px; color: var(--color-muted); }
         .results-bar strong { color: var(--color-forest); }
         .compare-hint { background: var(--color-ivory); border:1px solid var(--color-border); padding:6px 10px; border-radius:999px; font-size:12px; }
@@ -167,12 +156,17 @@ export default function Properties() {
         .filter-col.open { display:block; }
         @media(min-width:980px){ .filter-col{ display:block; } .mobile-only{ display:none !important; } }
 
-        .compare-table-wrap { margin-top:18px; overflow-x:auto; }
+        .compare-table-wrap { margin-top:18px; overflow-x:auto; -webkit-overflow-scrolling: touch; }
         .compare-table { border:1px solid var(--color-border); border-radius:12px; overflow:hidden; background:white; }
         .compare-table table { width:100%; border-collapse:collapse; min-width:520px; }
         .compare-table th, .compare-table td { padding:12px 14px; border-bottom:1px solid var(--color-border); text-align:left; font-size:14px; }
         .compare-table th { background: var(--color-ivory); font-weight:600; color: var(--color-forest); }
         .compare-table td:first-child { font-weight:600; color: var(--color-forest); background:#fcfaf7; width:140px; }
+
+        @media(max-width: 640px){
+          .page-head h1 { font-size: 24px; }
+          .results-bar { flex-direction: column; align-items: flex-start; }
+        }
       `}</style>
     </div>
   )

@@ -13,7 +13,7 @@ export default function Favorites(){
       <div className="container" style={{padding:'40px 0', textAlign:'center'}}>
         <Heart size={32} style={{color:'var(--color-border-dark)', margin:'0 auto'}}/>
         <h2 className="heading-serif">No favourites yet</h2>
-        <p style={{color:'var(--color-muted)'}}>Tap the heart on any property card to save it here. Favourites persist after refresh via LocalStorage.</p>
+        <p style={{color:'var(--color-muted)'}}>Save properties you love — tap the heart on any listing to keep it here for later.</p>
         <Link to="/properties" className="btn btn-primary">Browse properties</Link>
       </div>
     )

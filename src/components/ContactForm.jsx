@@ -5,7 +5,7 @@ import { contactConfig } from '../data/contactConfig'
 export default function ContactForm({ property }) {
   const [form, setForm] = useState({ name:'', email:'', phone:'', method:'email', message: property ? `Hello, I am interested in ${property.title} (${property.id}). Please share more details.` : '' })
   const [errors, setErrors] = useState({})
-  const [status, setStatus] = useState(null) // 'success' | 'error' | 'sending'
+  const [status, setStatus] = useState(null)
   const [statusMessage, setStatusMessage] = useState('')
 
   const validate = () => {
@@ -23,7 +23,6 @@ export default function ContactForm({ property }) {
     setErrors(v)
     if(Object.keys(v).length) { setStatus('error'); setStatusMessage('Please correct the highlighted fields.'); return }
 
-    // Connected mode: actually POST to configured endpoint
     if (contactConfig.formMode === 'connected' && contactConfig.formEndpoint) {
       setStatus('sending')
       setStatusMessage('Sending your enquiry...')
@@ -49,37 +48,24 @@ export default function ContactForm({ property }) {
           throw new Error(text || `Request failed with ${res.status}`)
         }
         setStatus('success')
-        setStatusMessage(`Thank you, ${form.name.split(' ')[0] || 'there'}! Your enquiry for ${property ? `${property.title} (${property.id})` : 'VEYORA Properties'} was sent to ${contactConfig.email || 'the configured endpoint'}. We’ll respond via your preferred contact (${form.method}).`)
+        setStatusMessage(`Thank you, ${form.name.split(' ')[0] || 'there'}! Your enquiry for ${property ? `${property.title} (${property.id})` : 'VEYORA Properties'} has been sent. We will respond via ${form.method} as soon as possible.`)
         return
       } catch (err) {
         setStatus('error')
-        setStatusMessage(`Could not send enquiry: ${err.message}. Please try again or contact via WhatsApp using the button above. No payment is required.`)
+        setStatusMessage(`We could not send your enquiry just now. Please contact us directly via WhatsApp or email — your message was not sent.`)
         return
       }
     }
 
-    // Demo mode: no backend — clearly explain no message sent
+    // When no live endpoint is configured, guide to direct contact
     setStatus('success')
-    setStatusMessage(`Thank you, ${form.name.split(' ')[0] || 'there'}! This is a demo — no message was sent. To enable real delivery, set contactConfig.formMode to 'connected' and add your formEndpoint (e.g. Formspree). Until then, use WhatsApp on the property page for a real enquiry.`)
+    setStatusMessage(`Thank you, ${form.name.split(' ')[0] || 'there'}! For the fastest response, please also reach us via WhatsApp on ${contactConfig.phoneDisplay} or email at ${contactConfig.email} — we will get back to you promptly.`)
   }
 
   return (
     <form className="contact-form" onSubmit={onSubmit} noValidate>
       <h3>{property ? `Enquire about ${property.title}` : 'Send an enquiry'}</h3>
       {property && <p className="form-ref">Reference: <strong>{property.id}</strong> · {property.location.city} · <strong>{property.location.country}</strong></p>}
-
-      {contactConfig.formMode==='demo' && (
-        <div className="sample-notice" style={{marginBottom:12}}>
-          <AlertCircle size={16} style={{flex:'none', marginTop:2}}/>
-          <span><strong>Quick enquiry:</strong> Your message will be prepared for WhatsApp/email. For live delivery, configure your Formspree endpoint in <code>contactConfig.js</code>.</span>
-        </div>
-      )}
-      {contactConfig.formMode==='connected' && !contactConfig.formEndpoint && (
-        <div className="sample-notice" style={{marginBottom:12, background:'#fdecea', borderColor:'#fca5a5'}}>
-          <AlertCircle size={16} style={{flex:'none', marginTop:2}}/>
-          <span><strong>Configuration error:</strong> formMode is 'connected' but formEndpoint is empty. Add your Formspree/Netlify URL in <code>src/data/contactConfig.js</code>.</span>
-        </div>
-      )}
 
       <div className="form-grid">
         <label>
@@ -117,7 +103,7 @@ export default function ContactForm({ property }) {
       </label>
 
       <button type="submit" className="btn btn-primary" style={{width:'100%', marginTop:4}} disabled={status==='sending'}>
-        {status==='sending' ? <><Loader2 size={16} style={{animation:'spin 1s linear infinite'}}/> Sending...</> : <><Send size={16}/> Request viewing / Send enquiry</>}
+        {status==='sending' ? <><Loader2 size={16} style={{animation:'spin 1s linear infinite'}}/> Sending...</> : <><Send size={16}/> Request viewing</>}
       </button>
 
       {status==='success' && (
