@@ -1,23 +1,29 @@
-/* Property grid responsiveness */
+/* Property grid — 8 properties: 4×2 on large desktop, responsive to mobile */
 .properties-grid {
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  grid-template-columns: 1fr;
 }
 
-/* Tablet */
-@media (min-width: 640px) {
-  .properties-grid { grid-template-columns: repeat(2, 1fr); }
+/* Very small phones: 1 column (320px base) */
+@media (min-width: 360px) {
+  .properties-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
 }
+
+/* Tablet portrait */
 @media (min-width: 768px) {
-  .properties-grid { grid-template-columns: repeat(3, 1fr); }
+  .properties-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
 }
-/* Wide desktop: 5 columns × 4 rows */
-@media (min-width: 1100px) {
+@media (min-width: 900px) {
+  .properties-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+
+/* Large desktop: 4 columns × 2 rows — the required 8-property layout */
+@media (min-width: 1200px) {
   .properties-grid { grid-template-columns: repeat(4, 1fr); }
 }
-@media (min-width: 1360px) {
-  .properties-grid { grid-template-columns: repeat(5, 1fr); }
+@media (min-width: 1440px) {
+  .properties-grid { grid-template-columns: repeat(4, 1fr); gap: 22px; }
 }
 
 /* Navbar mobile */
@@ -32,13 +38,16 @@
   .mobile-drawer { display: none !important; }
 }
 
-/* Home hero */
+/* Home hero — stack on mobile */
 .hero-grid {
   display: grid;
   gap: 24px;
 }
 @media (min-width: 900px) {
   .hero-grid { grid-template-columns: 1.05fr 0.95fr; align-items: center; }
+}
+@media (max-width: 640px) {
+  .hero-grid { gap: 18px; }
 }
 
 /* Details layout */
@@ -77,3 +86,34 @@
 /* Two col */
 .two-col { display:grid; gap:24px; }
 @media (min-width: 800px) { .two-col { grid-template-columns: 1fr 1fr; } }
+
+/* Prevent horizontal overflow everywhere */
+html, body { overflow-x: hidden; }
+.container { min-width: 0; }
+.properties-grid, .hero-grid, .details-grid, .footer-grid,
+.filter-layout, .stats-grid, .two-col { min-width: 0; }
+
+/* Responsive typography */
+h1 { font-size: clamp(26px, 5vw, 42px); }
+h2 { font-size: clamp(20px, 3.5vw, 28px); }
+h3 { font-size: clamp(16px, 2.5vw, 20px); }
+
+/* Cards — ensure no overflow on mobile */
+.pcard, .cat-card, .why-card, .cta-card, .contact-card, .enquiry-card {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* Filter panel — mobile drawer behavior */
+@media (max-width: 979px) {
+  .filter-panel { position: static; }
+  .filter-layout { gap: 16px; }
+  .page-head-actions { flex-direction: column; align-items: stretch; }
+  .head-search { max-width: none; min-width: 0; width: 100%; }
+}
+
+/* Gallery thumbs — horizontal scroll with edge fade on mobile */
+.gallery-thumbs, .lb-thumbs { -webkit-overflow-scrolling: touch; }
+
+/* Tables may need horizontal scroll on mobile */
+.compare-table-wrap, .specs-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }

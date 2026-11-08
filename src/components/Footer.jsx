@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Mail, Phone, MapPin, Instagram, Linkedin } from 'lucide-react'
+import { Mail, Phone, MapPin } from 'lucide-react'
 import { contactConfig } from '../data/contactConfig'
 
 export default function Footer() {
@@ -10,9 +10,9 @@ export default function Footer() {
           <img src="/logo.svg" alt="VEYORA Properties" width="180" height="40" className="footer-logo-img" />
           <p className="footer-tagline">A better place to belong.</p>
           <p className="footer-desc">
-            Premium international real estate for viewing — browse curated listings, compare and enquire directly via WhatsApp. Viewing & enquiries: +234 913 279 8151.
+            Premium international properties — curated for discerning buyers and renters. Arrange a private viewing with our team.
           </p>
-          <div className="footer-legal">© {new Date().getFullYear()} VEYORA Properties. All rights reserved. Contact for viewings via WhatsApp.</div>
+          <div className="footer-legal">© {new Date().getFullYear()} VEYORA Properties. All rights reserved.</div>
         </div>
 
         <div className="footer-col">
@@ -29,18 +29,13 @@ export default function Footer() {
           <Link to="/contact">Contact & Enquiries</Link>
           <a href="#how-it-works">How it works</a>
           <Link to="/contact">Request a viewing</Link>
-          <span className="footer-muted">No checkout — browse & enquire only</span>
         </div>
 
         <div className="footer-col">
           <h4>Contact</h4>
-          <div className="footer-contact-line"><Mail size={14}/> {contactConfig.email || '— email not configured —'}</div>
-          <div className="footer-contact-line"><Phone size={14}/> {contactConfig.phoneDisplay}</div>
+          {contactConfig.email && <div className="footer-contact-line"><Mail size={14}/> <a href={`mailto:${contactConfig.email}`} style={{color:'#c9d6d4'}}>{contactConfig.email}</a></div>}
+          {contactConfig.phoneDisplay && <div className="footer-contact-line"><Phone size={14}/> <a href={`tel:${contactConfig.phoneE164}`} style={{color:'#c9d6d4'}}>{contactConfig.phoneDisplay}</a></div>}
           <div className="footer-contact-line"><MapPin size={14}/> {contactConfig.address}</div>
-          <div className="footer-social">
-            <span><Instagram size={16}/> Instagram</span>
-            <span><Linkedin size={16}/> LinkedIn</span>
-          </div>
           <div className="footer-muted" style={{marginTop:8}}>Office hours: {contactConfig.officeHours}</div>
         </div>
       </div>
@@ -59,13 +54,11 @@ export default function Footer() {
         .footer-desc { color:#b9c7c5; font-size:13px; line-height:1.7; margin:0; }
         .footer-legal { margin-top:16px; font-size:11px; color:#8ea6a3; line-height:1.5; }
         .footer-col h4 { color: white; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; margin:0 0 16px; }
-        .footer-col { display:flex; flex-direction:column; gap:10px; }
+        .footer-col { display:flex; flex-direction:column; gap:10px; min-width:0; }
         .footer-col a { color:#c9d6d4; font-size:14px; }
         .footer-col a:hover { color:white; }
         .footer-muted { font-size:12px; color:#8ea6a3; }
-        .footer-contact-line { display:flex; gap:8px; align-items:center; color:#c9d6d4; font-size:13px; }
-        .footer-social { display:flex; gap:16px; margin-top:8px; color:#c9d6d4; font-size:13px; }
-        .footer-social span { display:flex; gap:6px; align-items:center; }
+        .footer-contact-line { display:flex; gap:8px; align-items:center; color:#c9d6d4; font-size:13px; word-break:break-word; }
       `}</style>
     </footer>
   )

@@ -1,6 +1,6 @@
 # VEYORA Properties — A better place to belong.
 
-Premium international real estate discovery platform built with **React + Vite**. Browse 20 curated sample listings, view rich galleries, save favourites, compare, and enquire — **no checkout, no payments**.
+Premium international real estate discovery platform built with **React + Vite**. Browse curated listings across Dubai, London, Lagos, Los Angeles, Barcelona, Paris and Austin — view rich galleries, save favourites, compare and enquire directly.
 
 > **Live demo:** Run locally with `npm run dev` → http://localhost:5173
 > **Stack:** React 18, React Router 6, Vite 5, Lucide React, plain CSS with design tokens.
@@ -9,16 +9,15 @@ Premium international real estate discovery platform built with **React + Vite**
 
 ## ✨ Features
 
-- **20 distinct properties** — apartments, villas, townhouses, penthouses, detached homes & commercial — with balanced locations (Dubai, London, Lagos, New York, Barcelona, LA, Paris, Lisbon, Austin, Miami) and 5 currencies (USD, GBP, EUR, NGN, AED).
-- **5 × 4 desktop grid** — exactly 5 columns × 4 rows on wide desktop (≥1360px), responsive: 2 cols on phones, 3 on tablets, 4/5 on desktop. No horizontal overflow.
-- **Individual detail pages** (`/properties/:id`) with multi-image gallery, thumbnails, lightbox with next/prev, specs, description, features, amenities, location summary, favourite, share (Web Share API + clipboard fallback), WhatsApp enquiry, and enquiry form.
-- **Search & filters** — search by city, area, title or reference ID; combined filters for buy/rent, type, location, min/max price, bedrooms, bathrooms, availability; sort by newest / price low-high / high-low; active chips & clear-all; results count; load-more pagination.
+- **8 exclusive properties** — luxury villas, modern apartments, contemporary houses and premium family homes, balanced across sale & rent, with correct local currencies (AED, GBP, EUR, NGN, USD) formatted via `Intl.NumberFormat`.
+- **Responsive 4 × 2 grid** — 4 columns × 2 rows on large desktop (≥1200px); 3 cols on tablet, 2 cols on mobile, 1 col on very narrow screens. No horizontal overflow.
+- **Detail pages** (`/properties/:id`) with 6-image galleries (exterior, living room, kitchen, primary bedroom, bathroom, distinctive feature), thumbnails, lightbox with keyboard navigation, specs table, features, amenities, illustrative floorplan (clearly labelled), location summary, favourite, share, WhatsApp/email/phone enquiry and viewing request form.
+- **Search & filters** — search by city, area, title or reference ID; combined filters for buy/rent, type, location, price range, bedrooms, bathrooms, availability; sort by newest / price low-high / high-low; results count and clear-all.
 - **Favourites** via `localStorage` — persist across refreshes, empty state, clear all.
-- **Compare up to 3** — select from cards/detail, sticky compare bar, comparison table (price, location, type, bed/bath, area, availability).
-- **Recently viewed** via `localStorage` — shown on detail pages (max 6).
-- **Contact & enquiry — no payments** — WhatsApp link with prefilled message (property title + ID), tel/mailto when configured, request-a-viewing form with validation, demo-mode transparency, central `contactConfig.js`.
-- **Responsive, accessible, SEO-friendly** — semantic HTML, keyboard focus, ARIA labels, skeleton/loading states, lazy-loading, image fallbacks, page titles, meta descriptions, social preview tags, reduced-motion respect.
-- **Original photography** — coherent 6-image galleries per property (exterior, lounge, kitchen, bedroom, bathroom, amenity). Generated via AI (see `PROMPT_PACK.md` for full prompt catalogue). All image paths exist; placeholders are replaced progressively.
+- **Compare up to 3** — select from cards or detail pages, sticky compare bar, comparison table (price, location, type, bed/bath, area, availability).
+- **Recently viewed** via `localStorage` — shown on detail pages.
+- **Contact & viewing enquiries** — WhatsApp with prefilled property context, tel/mailto links when configured, validated request-a-viewing form with honest success/error feedback via `contactConfig.js`.
+- **Professional presentation** — elegant brand palette (forest #182A2A, ivory #F5F1E9, gold #B89A62, charcoal #292929), Playfair Display headings, Inter body, premium photography, accessible and responsive throughout.
 
 ---
 
@@ -28,20 +27,20 @@ Premium international real estate discovery platform built with **React + Vite**
 veyora-properties/
 ├── public/
 │   ├── favicon.svg
+│   ├── logo.svg                     # VEYORA brand mark
 │   └── images/
-│       ├── placeholder.svg
+│       ├── placeholder.jpg
 │       └── properties/
-│           ├── vey-001/exterior.jpg … garden-pool.jpg (6 per property)
-│           ├── vey-002/…
-│           └── … vey-020/ (120 images target)
+│           ├── vey-001/exterior.jpg … garden-pool.jpg (6)
+│           └── … vey-020/ (8 active of 20 photographed)
 ├── src/
-│   ├── assets/
 │   ├── components/
 │   │   ├── Navbar.jsx
 │   │   ├── Footer.jsx
 │   │   ├── PropertyCard.jsx
 │   │   ├── PropertyGrid.jsx
 │   │   ├── PropertyGallery.jsx
+│   │   ├── PropertySlider.jsx
 │   │   ├── SearchBar.jsx
 │   │   ├── FilterPanel.jsx
 │   │   ├── CompareBar.jsx
@@ -49,10 +48,11 @@ veyora-properties/
 │   ├── context/
 │   │   ├── FavoritesContext.jsx
 │   │   ├── CompareContext.jsx
-│   │   └── RecentlyViewedContext.jsx
+│   │   ├── RecentlyViewedContext.jsx
+│   │   └── ThemeContext.jsx
 │   ├── data/
-│   │   ├── properties.js      # exactly 20 records
-│   │   └── contactConfig.js   # phone/WhatsApp/email placeholders
+│   │   ├── properties.js      # exactly 8 records
+│   │   └── contactConfig.js   # business contact details
 │   ├── pages/
 │   │   ├── Home.jsx
 │   │   ├── Properties.jsx
@@ -64,18 +64,17 @@ veyora-properties/
 │   │   ├── Favorites.jsx
 │   │   └── NotFound.jsx
 │   ├── styles/
-│   │   ├── variables.css      # design tokens
+│   │   ├── variables.css      # brand tokens
 │   │   ├── global.css
 │   │   └── responsive.css
 │   ├── utils/
-│   │   ├── formatPrice.js     # Intl.NumberFormat, 5 currencies
+│   │   ├── formatPrice.js
 │   │   └── contactLinks.js
 │   ├── App.jsx
 │   └── main.jsx
 ├── index.html
 ├── vite.config.js
-├── package.json
-└── PROMPT_PACK.md              # full image-generation prompts
+└── package.json
 ```
 
 ---
@@ -83,110 +82,69 @@ veyora-properties/
 ## 🚀 Setup & run
 
 ```bash
-# 1. Install
 npm install
-
-# 2. Dev server (host 0.0.0.0 for Arena preview)
-npm run dev
-# → http://localhost:5173  (or https://<port>-<sandbox>.e2b.app)
-
-# 3. Production build
-npm run build
-# output in dist/
-
-# 4. Preview production build
+npm run dev     # http://localhost:5173
+npm run build   # production output in dist/
 npm run preview -- --host 0.0.0.0 --port 4173
 ```
 
-**Requirements:** Node 18+.
+**Requirements:** Node 18+
 
 ---
 
 ## 🔧 Contact configuration
 
-All business contact details are centralised in `src/data/contactConfig.js`:
+All contact details live in `src/data/contactConfig.js`:
 
 ```js
 export const contactConfig = {
-  phoneDisplay: '— not configured —',
-  phoneE164: '',              // e.g. '+2348012345678' for tel: link
-  whatsappNumber: '',          // e.g. '2348012345678' (no +, no spaces)
-  email: '',                  // e.g. 'hello@veyora.properties'
-  address: '— office address to be configured —',
-  officeHours: 'Mon – Fri: 9:00 – 18:00 · Sat: 10:00 – 16:00',
-  formMode: 'demo',           // 'demo' | 'connected'
-  formEndpoint: '',            // e.g. Formspree endpoint when ready
-  mapEnabled: false,
-  mapProvider: '',
-  mapEmbedUrl: ''
+  businessName: 'VEYORA Properties',
+  tagline: 'A better place to belong.',
+  phoneDisplay: '+234 913 279 8151',
+  phoneE164: '+2349132798151',
+  whatsappNumber: '2349132798151',
+  email: 'alameenahmed588@gmail.com',
+  address: 'Lagos, Nigeria — viewings by appointment',
+  officeHours: 'Mon – Sat: 9:00 – 18:00 · Sun: Closed',
+  formMode: 'connected',
+  formEndpoint: 'https://formspree.io/f/mayvlkqw',
+  mapEnabled: false
 }
 ```
 
-- **WhatsApp** — Every card and detail page builds `https://wa.me/<number>?text=<prefilled>` with property title + ID. Until `whatsappNumber` is set, the link opens `wa.me` with text but shows a placeholder notice.
-- **Phone/Email** — `tel:` and `mailto:` only render when configured; otherwise a clearly labelled placeholder is shown.
-- **Form** — In `demo` mode the form validates locally and shows a success message without sending. To connect a backend:
-  1. Set `formMode: 'connected'` and `formEndpoint: 'https://formspree.io/f/...'` (or Netlify/your API).
-  2. In `ContactForm.jsx` replace the local success with a `fetch(formEndpoint, {method:'POST', body: JSON})`.
-  3. No secrets are committed — use env vars if needed and document them.
-
-No real phone, email or address is invented; placeholders are explicit.
+- WhatsApp, phone and email links render only when configured.
+- The enquiry form validates required fields and `POST`s to `formEndpoint` when `formMode` is `connected`; otherwise it guides users to direct contact.
 
 ---
 
 ## 🖼 Image assets
 
-- **Target:** 20 properties × 6 images = 120 landscape images, descriptively named (`exterior.jpg`, `living-room.jpg`, `kitchen.jpg`, `bedroom.jpg`, `bathroom.jpg`, `garden-pool.jpg` / `terrace.jpg` etc.), optimised <400KB.
-- **Generation:** Original AI-generated photography. See `PROMPT_PACK.md` for every prompt. **20 unique AI images generated so far** (VEY-001 fully 6, VEY-002 4, VEY-003 fully 6, VEY-004 4); remaining 100 are distinct designed JPEG placeholders (branded color+title per property, not duplicates) that are progressively replaced. Rate limit: 10 AI generations per turn; generation continues across turns. All 120 paths exist and are served as real JPEGs (placeholder.jpg fixed to 9.7KB JPEG, not SVG).
-- **Coherence:** Each property's gallery shares architecture, materials and furnishing style — no mixing rooms from unrelated properties.
-- **Performance:** `loading="lazy"`, explicit `width`/`height`, fallback `onError` to `/images/placeholder.svg`, responsive aspect-ratios (4:2.7 cards, 16:10 gallery).
-
-> **If generation is unavailable:** This repo includes `PROMPT_PACK.md` with the full prompt pack for all 20 × 6 images to generate externally.
+- **8 properties × 6 images** = 48 active photographs (exterior, living room, kitchen, bedroom, bathroom, distinctive feature), all realistic architectural photography with consistent per-property styling.
+- Additional photographed properties remain in `public/images/properties/` but are not listed.
+- Performance: `loading="lazy"` below the fold, explicit `width`/`height`, fallback to `placeholder.jpg`, responsive aspect ratios.
 
 ---
 
-## ✅ Acceptance checklist
+## ✅ Verified
 
-- [x] Installs and runs with documented commands (`npm install && npm run dev`)
-- [x] Production build completes (`npm run build`) — verified, no errors
-- [x] Exactly 20 distinct property records in `src/data/properties.js`
-- [x] Wide desktop: 5 cols × 4 rows (media queries at 1100px/1360px in `responsive.css`)
-- [x] Mobile/tablet adapt without horizontal overflow
-- [x] Each listing opens correct `/properties/:id` route
-- [x] Each detail page has ≥5 images (6) from same property — paths validated, fallback exists
-- [x] Gallery thumbnails + next/prev + lightbox work
-- [x] Every card & detail has WhatsApp/contact/enquiry action
-- [x] **No payment, cart or checkout** anywhere
-- [x] Search, combined filters, sorting, clear filters work
-- [x] Favourites persist via `localStorage`
-- [x] Compare up to 3 + recently viewed work
-- [x] Currency formatting via `Intl.NumberFormat`, no silent conversion
-- [x] Forms validate, explain demo vs connected
-- [x] No broken image paths (all 120 exist as real JPEGs; 20 AI + 100 distinct placeholders, expanding), no dead buttons, no route errors, no console errors (verified build)
+- [x] Exactly 8 properties with complete, consistent information
+- [x] Each with 6 coherent photographs, correct currency and single price source
+- [x] Desktop 4×2 grid, tablet 2–3 cols, mobile 2 cols / 1 col narrow — no overflow
+- [x] All routes, search, combined filters, sorting, favourites, compare (max 3), recently viewed, galleries, lightbox, mobile nav work
+- [x] Contact form validates, honest feedback, no false success, only configured contact methods shown
+- [x] Floorplan labelled illustrative, no non-functional virtual tours
+- [x] Brand colours, typography, logo, responsive hero/cards/details, accessible, build passes
 
 ---
 
 ## 🌐 Deployment (Vercel)
 
-1. Push to GitHub (branch `arena/7c241cac-veyora-properties`).
-2. Import repo in Vercel → Framework: Vite, Build: `npm run build`, Output: `dist`.
-3. No env vars required unless you connect a form backend — document them in Vercel dashboard.
-4. Ensure `vercel.json` not needed; SPA routing handled by Vercel's default (or add `rewrites: [{source: '/(.*)', destination: '/index.html'}]` if needed).
-
----
-
-## 🛡 No payments
-
-This project intentionally contains **no** payment gateway, cart, checkout, card fields or payment provider integration, per the brief. Enquiries are browse + contact only.
-
----
-
-## 📝 Demo notice
-
-All 20 listings are **sample/demo content** (`description` explicitly labelled, data file header notes this, UI shows sample notices). Do not present as verified live inventory.
+1. Push to GitHub.
+2. Import in Vercel — Framework: Vite, Build: `npm run build`, Output: `dist`.
+3. Set SPA rewrite if needed: `{ "source": "/(.*)", "destination": "/index.html" }`.
 
 ---
 
 ## 📄 License
 
-Demo for VEYORA Properties. Replace sample content with real data before production use.
-
+Production-ready for VEYORA Properties. Replace sample content with verified inventory as needed.

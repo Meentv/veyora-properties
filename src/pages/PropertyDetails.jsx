@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { ArrowLeft, Heart, Share2, MapPin, BedDouble, Bath, Maximize2, Calendar, Sofa, Check, MessageCircle, Phone, Mail, Scale, Clock, Calculator, Video, Layers, FileText, ShieldCheck, Info } from 'lucide-react'
+import { ArrowLeft, Heart, Share2, MapPin, BedDouble, Bath, Maximize2, Calendar, Sofa, Check, MessageCircle, Phone, Mail, Scale, Clock, Calculator, Layers, FileText, ShieldCheck, Info } from 'lucide-react'
 import { properties, getPropertyById } from '../data/properties'
 import { formatPrice } from '../utils/formatPrice'
 import { useFavorites } from '../context/FavoritesContext'
@@ -27,7 +27,7 @@ function MortgageCalculator({ price, currency, isRent }) {
         <div className="calc-row">
           <span>Annual rent</span><strong>{formatPrice(annual, currency)}/yr</strong>
         </div>
-        <div className="calc-note"><Info size={12}/> Estimate only — no payment collected. Enquire for lease terms. Displayed in {currency} without conversion.</div>
+        <div className="calc-note"><Info size={12}/> Estimate only. Enquire for lease terms. Displayed in {currency} without conversion.</div>
       </div>
     )
   }
@@ -60,7 +60,7 @@ function MortgageCalculator({ price, currency, isRent }) {
         <span>Est. monthly</span>
         <strong>{formatPrice(Math.round(monthly), currency)}/mo</strong>
       </div>
-      <div className="calc-note"><Info size={12}/> Informational only — not a loan offer. No checkout or payment on VEYORA. Use real lender for approval. Estimates use listed {currency} price without currency conversion.</div>
+      <div className="calc-note"><Info size={12}/> For information only — not a loan offer. Use a licensed lender for approval. Estimates use the listed {currency} price without conversion.</div>
     </div>
   )
 }
@@ -78,8 +78,8 @@ export default function PropertyDetails() {
     return (
       <div className="container" style={{padding:'40px 0'}}>
         <h2>Property not found</h2>
-        <p>No property matches “{id}”. Check the reference ID or browse the catalogue.</p>
-        <Link to="/properties" className="btn btn-primary">Back to properties</Link>
+        <p>No property matches “{id}”. Please check the reference or browse our collection.</p>
+        <Link to="/properties" className="btn btn-primary">Browse properties</Link>
       </div>
     )
   }
@@ -106,7 +106,7 @@ export default function PropertyDetails() {
   return (
     <div className="details-page">
       <div className="container">
-        <Link to="/properties" className="back-link"><ArrowLeft size={14}/> Back to catalogue</Link>
+        <Link to="/properties" className="back-link"><ArrowLeft size={14}/> Back to properties</Link>
 
         <div className="details-head">
           <div>
@@ -124,7 +124,7 @@ export default function PropertyDetails() {
           <div className="details-price">
             <div className="price-value">{formatPrice(property.price, property.currency)} {isRent && <span style={{fontSize:13, fontWeight:500, color:'var(--color-muted)'}}>/ month</span>}</div>
             <div className="price-sub">{property.propertyType} · {property.bedrooms} bd · {property.bathrooms} ba · {property.areaSqm} m²</div>
-            <div className="price-note"><ShieldCheck size={12}/> Priced in {property.currency} · no conversion</div>
+            <div className="price-note"><ShieldCheck size={12}/> Priced in {property.currency}</div>
           </div>
         </div>
 
@@ -144,10 +144,8 @@ export default function PropertyDetails() {
             <div className="details-section">
               <h2 className="heading-serif">About this property</h2>
               <p className="lead">{property.description}</p>
-              <div className="sample-notice" style={{background:'#E6F4EA', borderColor:'#A7D4B4', color:'#1A6B4A'}}><span><strong>For viewing:</strong> Enquire via WhatsApp <strong>+234 913 279 8151</strong> to schedule a viewing. Price in {property.currency} · no conversion.</span></div>
             </div>
 
-            {/* Rich specs table */}
             <div className="details-section">
               <h3><FileText size={16} style={{display:'inline', marginRight:6}}/> Property specifications</h3>
               <div className="specs-table">
@@ -176,7 +174,6 @@ export default function PropertyDetails() {
               </div>
             </div>
 
-            {/* Floorplan */}
             <div className="details-section">
               <h3><Layers size={16} style={{display:'inline', marginRight:6}}/> Floorplan</h3>
               <div className="floorplan-card">
@@ -189,7 +186,7 @@ export default function PropertyDetails() {
                     <div className="fp-room outdoor"><span>Outdoor</span><small>Terrace / Garden</small></div>
                     <div className="fp-room other"><span>Other</span><small>{property.areaSqm} m² total</small></div>
                   </div>
-                  <div className="floorplan-note">Illustrative floorplan — not to scale and not a supplied architectural drawing. Exact plan available only if owner provides it; enquire for details.</div>
+                  <div className="floorplan-note">Illustrative layout — not to scale and not a supplied architectural drawing. Enquire for the full plan.</div>
                 </div>
                 <div className="floorplan-meta">
                   <div><strong>{property.areaSqm} m²</strong><span>Total area</span></div>
@@ -199,38 +196,16 @@ export default function PropertyDetails() {
               </div>
             </div>
 
-            {/* Virtual tour — only if assets connected; currently illustrative */}
-            <div className="details-section">
-              <h3><Video size={16} style={{display:'inline', marginRight:6}}/> Virtual tour</h3>
-              <div className="tour-card">
-                <div className="tour-placeholder">
-                  <Video size={28}/>
-                  <strong>Virtual tour — not yet connected</strong>
-                  <span>360° tours appear here when supplied by the owner. Enquire on WhatsApp +234 913 279 8151 to ask about a video tour for this viewing.</span>
-                  <span style={{fontSize:11, opacity:0.8, marginTop:6}}>No video asset connected — this is an illustrative placeholder, not an available tour.</span>
-                </div>
-                <div className="tour-meta">
-                  <span><ShieldCheck size={12}/> Tours only when supplied</span>
-                  <span>•</span>
-                  <span>Enquire for availability</span>
-                </div>
-              </div>
-            </div>
-
             <div className="details-section">
               <h3>Location</h3>
-              {contactConfig.mapEnabled ? (
-                <div className="map-placeholder">Map would appear here via {contactConfig.mapProvider}</div>
-              ) : (
-                <div className="location-card">
-                  <MapPin size={16}/>
-                  <div>
-                    <strong>{property.location.area}</strong><br/>
-                    <span>{property.location.city}, {property.location.country}</span><br/>
-                    <small>Exact pin hidden — location summary only until a map provider is configured. Configure <code>contactConfig.mapEmbedUrl</code> to enable maps.</small>
-                  </div>
+              <div className="location-card">
+                <MapPin size={16}/>
+                <div>
+                  <strong>{property.location.area}</strong><br/>
+                  <span>{property.location.city}, {property.location.country}</span><br/>
+                  <small>Contact us for the exact address and directions to your viewing.</small>
                 </div>
-              )}
+              </div>
             </div>
 
             <div className="details-section">
@@ -265,13 +240,12 @@ export default function PropertyDetails() {
           <aside className="details-side">
             <div className="enquiry-card">
               <h3>Enquire about this home</h3>
-              <p>Reference <strong>{property.id}</strong> — {formatPrice(property.price, property.currency)} {isRent?'/mo':''} · {property.location.city}. Our team will respond about availability, viewings and next steps.</p>
+              <p>Reference <strong>{property.id}</strong> — {formatPrice(property.price, property.currency)} {isRent?'/mo':''} · {property.location.city}</p>
               <div className="enquiry-actions">
                 <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{width:'100%'}}><MessageCircle size={16}/> WhatsApp enquiry</a>
-                {telLink ? <a href={telLink} className="btn btn-outline" style={{width:'100%'}}><Phone size={16}/> Call {contactConfig.phoneDisplay}</a> : <div className="placeholder-line"><Phone size={14}/> Phone not configured — see contact settings</div>}
-                {mailLink ? <a href={mailLink} className="btn btn-outline" style={{width:'100%'}}><Mail size={16}/> Email enquiry</a> : <div className="placeholder-line"><Mail size={14}/> Email not configured — see contact settings</div>}
+                {telLink && <a href={telLink} className="btn btn-outline" style={{width:'100%'}}><Phone size={16}/> Call {contactConfig.phoneDisplay}</a>}
+                {mailLink && <a href={mailLink} className="btn btn-outline" style={{width:'100%'}}><Mail size={16}/> Email enquiry</a>}
               </div>
-              <div className="sample-notice" style={{marginTop:12, fontSize:12}}><strong>No payments:</strong> VEYORA never collects payment on this site. Enquiries only. Price in {property.currency}.</div>
             </div>
 
             <MortgageCalculator price={property.price} currency={property.currency} isRent={isRent} />
@@ -332,24 +306,6 @@ export default function PropertyDetails() {
         .floorplan-meta strong { display:block; color: var(--color-forest); font-size:15px; }
         .floorplan-meta span { font-size:11px; color: var(--color-muted); text-transform:uppercase; letter-spacing:.06em; font-weight:600; }
 
-        .tour-card { border:1px solid var(--color-border); border-radius:12px; overflow:hidden; background: white; }
-        .tour-placeholder { background: linear-gradient(135deg, var(--color-forest) 0%, #243f3f 100%); color: white; padding:28px 20px; text-align:center; display:flex; flex-direction:column; gap:10px; align-items:center; }
-        .tour-placeholder strong { font-family: var(--font-serif); font-size:16px; }
-        .tour-placeholder span { font-size:12px; color: #c9d6d4; max-width:360px; line-height:1.5; }
-        .tour-meta { display:flex; gap:8px; justify-content:center; align-items:center; padding:8px 12px; background: var(--color-ivory); font-size:11px; color: var(--color-muted); font-weight:600; }
-
-        .calc-card { background: var(--color-white); border:1px solid var(--color-border); border-radius: var(--radius-lg); padding:16px; }
-        .calc-card h4 { margin:0 0 12px; font-size:14px; color: var(--color-forest); display:flex; gap:8px; align-items:center; }
-        .calc-grid { display:grid; gap:12px; }
-        .calc-grid span { font-size:12px; color: var(--color-muted); font-weight:600; }
-        .calc-value { font-weight:700; color: var(--color-forest); font-size:14px; }
-        .calc-grid input[type=range] { width:100%; accent-color: var(--color-forest); }
-        .calc-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--color-border); font-size:13px; }
-        .calc-result { display:flex; justify-content:space-between; align-items:center; background: var(--color-forest); color: white; padding:12px 14px; border-radius:10px; margin-top:12px; }
-        .calc-result span { font-size:12px; opacity:.8; }
-        .calc-result strong { font-size:16px; }
-        .calc-note { font-size:11px; color: var(--color-muted); display:flex; gap:6px; align-items:center; margin-top:8px; line-height:1.4; }
-
         .location-card { display:flex; gap:12px; background: var(--color-ivory); border:1px solid var(--color-border); border-radius:12px; padding:14px; font-size:13px; }
         .location-card small { color: var(--color-muted); line-height:1.5; }
         .action-row { display:flex; gap:8px; flex-wrap:wrap; }
@@ -357,8 +313,8 @@ export default function PropertyDetails() {
         .enquiry-card h3 { margin:0 0 6px; font-family: var(--font-serif); color: var(--color-forest); }
         .enquiry-card p { font-size:13px; color: var(--color-muted); line-height:1.5; }
         .enquiry-actions { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
-        .placeholder-line { font-size:12px; color: var(--color-muted); display:flex; gap:6px; align-items:center; background: var(--color-ivory); border:1px dashed var(--color-border); padding:8px 10px; border-radius:8px; }
         .details-side { display:flex; flex-direction:column; gap:16px; }
+        @media(max-width: 980px){ .enquiry-card{ position:static; } }
       `}</style>
     </div>
   )
