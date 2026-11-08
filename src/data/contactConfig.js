@@ -13,9 +13,9 @@ export const contactConfig = {
   whatsappNumber: '2349132798151',
   whatsappDefaultMessage: 'Hello VEYORA Properties, I am interested in ',
 
-  // Email — update if you have business email
-  email: 'hello@veyora.properties',
-  emailDisplay: 'hello@veyora.properties',
+  // Email — owner contact
+  email: 'alameenahmed588@gmail.com',
+  emailDisplay: 'alameenahmed588@gmail.com',
 
   // Office
   address: 'Lagos, Nigeria — viewings by appointment',
