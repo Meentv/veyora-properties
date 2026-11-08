@@ -136,7 +136,7 @@ No real phone, email or address is invented; placeholders are explicit.
 ## 🖼 Image assets
 
 - **Target:** 20 properties × 6 images = 120 landscape images, descriptively named (`exterior.jpg`, `living-room.jpg`, `kitchen.jpg`, `bedroom.jpg`, `bathroom.jpg`, `garden-pool.jpg` / `terrace.jpg` etc.), optimised <400KB.
-- **Generation:** Original AI-generated photography. See `PROMPT_PACK.md` for every prompt. 10 unique images have been generated in this build; the remaining 110 placeholders are copies of `vey-001/exterior.jpg` that are progressively replaced. The generation log and rate-limit note are in this README and in `PROMPT_PACK.md`.
+- **Generation:** Original AI-generated photography. See `PROMPT_PACK.md` for every prompt. **20 unique AI images generated so far** (VEY-001 fully 6, VEY-002 4, VEY-003 fully 6, VEY-004 4); remaining 100 are distinct designed JPEG placeholders (branded color+title per property, not duplicates) that are progressively replaced. Rate limit: 10 AI generations per turn; generation continues across turns. All 120 paths exist and are served as real JPEGs (placeholder.jpg fixed to 9.7KB JPEG, not SVG).
 - **Coherence:** Each property's gallery shares architecture, materials and furnishing style — no mixing rooms from unrelated properties.
 - **Performance:** `loading="lazy"`, explicit `width`/`height`, fallback `onError` to `/images/placeholder.svg`, responsive aspect-ratios (4:2.7 cards, 16:10 gallery).
 
@@ -161,7 +161,7 @@ No real phone, email or address is invented; placeholders are explicit.
 - [x] Compare up to 3 + recently viewed work
 - [x] Currency formatting via `Intl.NumberFormat`, no silent conversion
 - [x] Forms validate, explain demo vs connected
-- [x] No broken image paths (all 120 exist; unique generation in progress), no dead buttons, no route errors, no console errors (verified build)
+- [x] No broken image paths (all 120 exist as real JPEGs; 20 AI + 100 distinct placeholders, expanding), no dead buttons, no route errors, no console errors (verified build)
 
 ---
 
