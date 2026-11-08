@@ -126,6 +126,7 @@ export default function FilterPanel({ filters, onChange, onClear, resultCount, l
         }
         .chip button { border:none; background:var(--color-white); width:18px; height:18px; border-radius:999px; display:grid; place-items:center; cursor:pointer; }
         @media(max-width:979px){ .filter-panel{ position:static; } }
+        @media(max-width:400px){ .filter-group.two{ grid-template-columns:1fr; } }
       `}</style>
     </aside>
   )

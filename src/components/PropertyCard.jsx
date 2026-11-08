@@ -113,6 +113,7 @@ export default function PropertyCard({ property }) {
         .pcard-facts { display:flex; gap:10px; font-size:12px; color:var(--color-muted); border-top:1px solid var(--color-border); padding-top:8px; margin-top:2px; }
         .pcard-facts span { display:flex; gap:5px; align-items:center; }
         .pcard-actions { display:flex; gap:8px; margin-top:4px; }
+        @media(max-width:400px){ .pcard-actions{ flex-direction:column; } .pcard-actions .btn{ width:100%; } }
         .pcard-compare { display:flex; gap:8px; align-items:center; font-size:12px; color:var(--color-muted); cursor:pointer; margin-top:2px; }
         .pcard-compare input { accent-color: var(--color-forest); }
       `}</style>

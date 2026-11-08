@@ -26,9 +26,8 @@ export default function Home() {
     { icon: Building2, label:'Apartments', type:'apartment', count: properties.filter(p=>p.propertyType==='apartment').length },
     { icon: HomeIcon, label:'Villas', type:'villa', count: properties.filter(p=>p.propertyType==='villa').length },
     { icon: Landmark, label:'Townhouses', type:'townhouse', count: properties.filter(p=>p.propertyType==='townhouse').length },
-    { icon: Waves, label:'Penthouses', type:'penthouse', count: properties.filter(p=>p.propertyType==='penthouse').length },
     { icon: Store, label:'Houses', type:'detached', count: properties.filter(p=>p.propertyType==='detached').length },
-  ]
+  ].filter(c => c.count > 0)
 
   return (
     <div>
@@ -219,7 +218,7 @@ export default function Home() {
 
         .why-grid { display:grid; gap:16px; margin-top:20px; grid-template-columns:1fr; }
         @media(min-width:800px){ .why-grid{ grid-template-columns: repeat(3,1fr);} }
-        .why-card { background: #203232; border:1px solid #2d4a4a; border-radius: var(--radius-lg); padding:18px; }
+        .why-card { background: #2B2B28; border:1px solid #3A3835; border-radius: var(--radius-lg); padding:18px; }
         .why-card h3 { color:white; margin:10px 0 6px; font-size:16px; }
         .why-card p { color:#b9c7c5; font-size:13px; line-height:1.6; margin:0; }
         .why-card svg { color: var(--color-gold); }

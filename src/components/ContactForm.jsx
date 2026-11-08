@@ -57,9 +57,9 @@ export default function ContactForm({ property }) {
       }
     }
 
-    // When no live endpoint is configured, guide to direct contact
-    setStatus('success')
-    setStatusMessage(`Thank you, ${form.name.split(' ')[0] || 'there'}! For the fastest response, please also reach us via WhatsApp on ${contactConfig.phoneDisplay} or email at ${contactConfig.email} — we will get back to you promptly.`)
+    // When no live endpoint is configured, do not claim delivery — guide to direct contact
+    setStatus('error')
+    setStatusMessage(`Thank you, ${form.name.split(' ')[0] || 'there'} — your enquiry has been prepared but requires direct contact for delivery. Please reach us via WhatsApp on ${contactConfig.phoneDisplay} or email at ${contactConfig.email} for the fastest response.`)
   }
 
   return (
