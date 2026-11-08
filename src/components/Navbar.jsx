@@ -4,6 +4,7 @@ import { Menu, X, Heart, Scale, Search, Phone, Mail, Sun, Moon } from 'lucide-re
 import { useFavorites } from '../context/FavoritesContext'
 import { useCompare } from '../context/CompareContext'
 import { useTheme } from '../context/ThemeContext'
+import { contactConfig } from '../data/contactConfig'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -63,8 +64,8 @@ export default function Navbar() {
             </div>
             <button onClick={toggle} className="btn btn-outline theme-toggle-mobile">{theme==='light' ? <Moon size={14}/> : <Sun size={14}/>} {theme==='light' ? 'Dark mode' : 'Light mode'} (auto day/night)</button>
             <div className="mobile-contact">
-              <a href="mailto:alameenahmed588@gmail.com"><Mail size={14}/> alameenahmed588@gmail.com</a>
-              <a href="tel:+2349132798151"><Phone size={14}/> +234 913 279 8151</a>
+              <a href={`mailto:${contactConfig.email}`}><Mail size={14}/> {contactConfig.email}</a>
+              <a href={`tel:${contactConfig.phoneE164}`}><Phone size={14}/> {contactConfig.phoneDisplay}</a>
             </div>
           </div>
         </div>

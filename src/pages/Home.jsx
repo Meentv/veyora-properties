@@ -26,9 +26,8 @@ export default function Home() {
     { icon: Building2, label:'Apartments', type:'apartment', count: properties.filter(p=>p.propertyType==='apartment').length },
     { icon: HomeIcon, label:'Villas', type:'villa', count: properties.filter(p=>p.propertyType==='villa').length },
     { icon: Landmark, label:'Townhouses', type:'townhouse', count: properties.filter(p=>p.propertyType==='townhouse').length },
-    { icon: Waves, label:'Penthouses', type:'penthouse', count: properties.filter(p=>p.propertyType==='penthouse').length },
     { icon: Store, label:'Houses', type:'detached', count: properties.filter(p=>p.propertyType==='detached').length },
-  ]
+  ].filter(c => c.count > 0)
 
   return (
     <div>
