@@ -75,56 +75,73 @@ export default function PropertyGallery({ images, title }) {
       )}
 
       <style>{`
+        .gallery { min-width: 0; overflow: hidden; }
         .gallery-main { position:relative; aspect-ratio: 16/10; overflow:hidden; border-radius: var(--radius-lg); background: var(--color-ivory); }
-        .gallery-main img { width:100%; height:100%; object-fit:cover; }
+        .gallery-main img { width:100%; height:100%; object-fit:cover; display: block; }
         .gallery-nav {
           position:absolute; top:50%; transform:translateY(-50%);
           width:40px; height:40px; border-radius:999px;
           border:1px solid rgba(255,255,255,0.9); background: rgba(255,255,255,0.9);
           display:grid; place-items:center; cursor:pointer; color: var(--color-forest);
+          min-height: 44px; min-width: 44px;
         }
         .gallery-nav.prev { left:12px; } .gallery-nav.next { right:12px; }
         .gallery-expand {
           position:absolute; bottom:12px; right:12px;
           background: rgba(24,42,42,0.9); color:white; border:none;
           padding:8px 12px; border-radius:999px; display:flex; gap:6px; align-items:center;
-          cursor:pointer; font-size:12px; font-weight:600;
+          cursor:pointer; font-size:12px; font-weight:600; min-height: 36px;
         }
         .gallery-count {
           position:absolute; bottom:12px; left:12px;
           background: rgba(255,255,255,0.92); padding:6px 10px; border-radius:999px;
           font-size:12px; font-weight:600; color:var(--color-forest);
         }
-        .gallery-thumbs { display:flex; gap:10px; margin-top:12px; overflow-x:auto; padding-bottom:6px; scroll-behavior:smooth; }
-        .thumb { border:2px solid transparent; border-radius:10px; overflow:hidden; flex:none; width:96px; aspect-ratio: 4/3; padding:0; cursor:pointer; background: var(--color-ivory); }
-        .thumb img { width:100%; height:100%; object-fit:cover; }
+        .gallery-thumbs { display:flex; gap:10px; margin-top:12px; overflow-x:auto; padding-bottom:6px; scroll-behavior:smooth; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+        .thumb { border:2px solid transparent; border-radius:10px; overflow:hidden; flex:none; width:96px; aspect-ratio: 4/3; padding:0; cursor:pointer; background: var(--color-ivory); min-height: 44px; }
+        .thumb img { width:100%; height:100%; object-fit:cover; display: block; }
         .thumb-active { border-color: var(--color-forest); }
-        .gallery-hint { font-size:11px; color: var(--color-muted); margin-top:8px; text-align:center; }
+        .gallery-hint { font-size:11px; color: var(--color-muted); margin-top:8px; text-align:center; line-height: 1.4; padding: 0 8px; overflow-wrap: break-word; }
 
         .lightbox {
           position:fixed; inset:0; z-index:60;
           background: rgba(10,16,16,0.92);
-          display:grid; place-items:center; padding:20px;
+          display:grid; place-items:center; padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
         }
-        .lightbox-inner { position:relative; max-width:1100px; width:100%; display:grid; place-items:center; gap:12px; }
-        .lightbox-inner img { max-width:100%; max-height:70vh; border-radius:12px; object-fit:contain; background: #0a1010; }
+        .lightbox-inner { position:relative; max-width:1100px; width:100%; display:grid; place-items:center; gap:12px; min-width: 0; }
+        .lightbox-inner img { max-width:100%; max-height:68vh; border-radius:12px; object-fit:contain; background: #0a1010; display: block; }
         .lightbox-close {
           position:absolute; top:-8px; right:-8px;
-          width:40px; height:40px; border-radius:999px; border:none;
+          width:44px; height:44px; border-radius:999px; border:none;
           background: white; display:grid; place-items:center; cursor:pointer; z-index:2;
         }
         .lb-nav {
           position:absolute; top:50%; transform:translateY(-50%);
           width:44px; height:44px; border-radius:999px; border:none; background:white;
-          display:grid; place-items:center; cursor:pointer;
+          display:grid; place-items:center; cursor:pointer; min-width: 44px; min-height: 44px;
         }
         .lb-nav.prev { left:-8px; } .lb-nav.next { right:-8px; }
-        .lb-count { color:white; font-size:12px; background: rgba(255,255,255,0.14); padding:6px 12px; border-radius:999px; text-align:center; }
-        .lb-thumbs { display:flex; gap:8px; overflow-x:auto; max-width:100%; scroll-behavior:smooth; }
-        .lb-thumbs button { border:2px solid transparent; border-radius:8px; overflow:hidden; flex:none; width:72px; height:54px; padding:0; cursor:pointer; opacity:.7; }
+        .lb-count { color:white; font-size:12px; background: rgba(255,255,255,0.14); padding:6px 12px; border-radius:999px; text-align:center; max-width: 90%; overflow-wrap: break-word; }
+        .lb-thumbs { display:flex; gap:8px; overflow-x:auto; max-width:100%; scroll-behavior:smooth; -webkit-overflow-scrolling: touch; padding: 0 4px; }
+        .lb-thumbs button { border:2px solid transparent; border-radius:8px; overflow:hidden; flex:none; width:72px; height:54px; padding:0; cursor:pointer; opacity:.7; min-height: 44px; }
         .lb-thumbs button.on { border-color: var(--color-gold); opacity:1; }
-        .lb-thumbs img { width:100%; height:100%; object-fit:cover; }
-        .lb-help { color: #b9c7c5; font-size:11px; }
+        .lb-thumbs img { width:100%; height:100%; object-fit:cover; display: block; }
+        .lb-help { color: #b9c7c5; font-size:11px; text-align: center; }
+
+        @media(max-width: 640px){
+          .gallery-main { border-radius: 12px; }
+          .gallery-nav { width: 36px; height: 36px; min-width: 36px; min-height: 36px; }
+          .gallery-nav.prev { left:8px; } .gallery-nav.next { right:8px; }
+          .gallery-expand { padding:6px 10px; font-size:11px; bottom:8px; right:8px; }
+          .gallery-count { padding:4px 8px; font-size:11px; bottom:8px; left:8px; }
+          .thumb { width: 80px; }
+          .gallery-thumbs { gap: 8px; }
+        }
+        @media(max-width: 360px){
+          .thumb { width: 72px; }
+          .lb-thumbs button { width: 60px; height: 45px; }
+          .lightbox-inner img { max-height: 60vh; }
+        }
         @media(max-width:700px){ .lb-nav.prev{left:6px} .lb-nav.next{right:6px} }
       `}</style>
     </div>
