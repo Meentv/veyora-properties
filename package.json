@@ -1,0 +1,22 @@
+{
+  "name": "veyora-properties",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "VEYORA Properties — A better place to belong. Premium real-estate discovery platform.",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173"
+  },
+  "dependencies": {
+    "lucide-react": "^0.445.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^5.4.8"
+  }
+}

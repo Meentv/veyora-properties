@@ -1,0 +1,79 @@
+/* Property grid responsiveness */
+.properties-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Tablet */
+@media (min-width: 640px) {
+  .properties-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 768px) {
+  .properties-grid { grid-template-columns: repeat(3, 1fr); }
+}
+/* Wide desktop: 5 columns × 4 rows */
+@media (min-width: 1100px) {
+  .properties-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 1360px) {
+  .properties-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* Navbar mobile */
+.nav-links { display: none; }
+.nav-actions-desktop { display: none; }
+.nav-menu-btn { display: inline-flex; }
+
+@media (min-width: 980px) {
+  .nav-links { display: flex; }
+  .nav-actions-desktop { display: flex; }
+  .nav-menu-btn { display: none; }
+  .mobile-drawer { display: none !important; }
+}
+
+/* Home hero */
+.hero-grid {
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 1.05fr 0.95fr; align-items: center; }
+}
+
+/* Details layout */
+.details-grid {
+  display: grid;
+  gap: 32px;
+}
+@media (min-width: 980px) {
+  .details-grid { grid-template-columns: 1.65fr 0.85fr; }
+}
+
+/* Footer */
+.footer-grid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 700px) {
+  .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+}
+
+/* Filter layout */
+.filter-layout {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 980px) {
+  .filter-layout { grid-template-columns: 280px 1fr; }
+}
+
+/* About stats */
+.stats-grid { display: grid; grid-template-columns: repeat(2,1fr); gap:16px; }
+@media (min-width: 700px) { .stats-grid { grid-template-columns: repeat(4,1fr); } }
+
+/* Two col */
+.two-col { display:grid; gap:24px; }
+@media (min-width: 800px) { .two-col { grid-template-columns: 1fr 1fr; } }
