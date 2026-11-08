@@ -93,6 +93,15 @@ html, body { overflow-x: hidden; }
 .properties-grid, .hero-grid, .details-grid, .footer-grid,
 .filter-layout, .stats-grid, .two-col { min-width: 0; }
 
+/* Safe-area & touch */
+html { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+img, video { max-width: 100%; height: auto; }
+.btn, .icon-btn, .nav-link, .mobile-drawer a, .filter-panel select, .filter-panel input { min-height: 44px; }
+@media (max-width: 640px) {
+  .btn { padding: 10px 16px; font-size: 14px; }
+  .section { padding: 28px 0; }
+}
+
 /* Responsive typography */
 h1 { font-size: clamp(26px, 5vw, 42px); }
 h2 { font-size: clamp(20px, 3.5vw, 28px); }

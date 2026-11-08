@@ -38,12 +38,12 @@ input, select, textarea { font: inherit; }
 .container {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding-left: var(--content-pad);
-  padding-right: var(--content-pad);
+  padding-left: max(var(--content-pad), env(safe-area-inset-left));
+  padding-right: max(var(--content-pad), env(safe-area-inset-right));
 }
 
 .section {
-  padding: 56px 0;
+  padding: clamp(28px, 5vw, 56px) 0;
 }
 .section-light {
   background: var(--color-ivory);
