@@ -1,0 +1,47 @@
+:root {
+  --color-forest: #182A2A;
+  --color-forest-light: #1e3636;
+  --color-forest-mid: #243f3f;
+  --color-ivory: #F5F1E9;
+  --color-ivory-dark: #EDE8DD;
+  --color-gold: #B89A62;
+  --color-gold-light: #d0b585;
+  --color-gold-dark: #967a48;
+  --color-charcoal: #292929;
+  --color-charcoal-light: #3a3a3a;
+  --color-white: #FFFFFF;
+  --color-muted: #6b6b6b;
+  --color-muted-light: #9a9a9a;
+  --color-border: #e8e4dc;
+  --color-border-dark: #d6d0c2;
+  --color-error: #b42318;
+  --color-success: #1a6b4a;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 4px rgba(24,42,42,0.08);
+  --shadow-md: 0 4px 16px rgba(24,42,42,0.12);
+  --shadow-lg: 0 12px 40px rgba(24,42,42,0.14);
+
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 72px;
+  --space-3xl: 96px;
+
+  --content-max: 1440px;
+  --content-pad: 24px;
+}
+
+@media (max-width: 768px) {
+  :root { --content-pad: 16px; }
+}
