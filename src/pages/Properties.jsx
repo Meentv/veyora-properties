@@ -25,7 +25,7 @@ export default function Properties() {
     availability: 'all',
     sort: 'newest'
   })
-  const [visibleCount, setVisibleCount] = useState(12)
+  const [visibleCount, setVisibleCount] = useState(20)
   const [showFilters, setShowFilters] = useState(false)
 
   // sync initial type changes
@@ -75,7 +75,7 @@ export default function Properties() {
       minPrice:'', maxPrice:'', minBeds:'', minBaths:'',
       availability:'all', sort:'newest'
     })
-    setVisibleCount(12)
+    setVisibleCount(20)
   }
 
   return (

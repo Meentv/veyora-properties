@@ -12,7 +12,7 @@ import PropertyCard from '../components/PropertyCard'
 import { buildWhatsAppLink, buildMailtoLink, buildTelLink } from '../utils/contactLinks'
 import { contactConfig } from '../data/contactConfig'
 
-function MortgageCalculator({ price, isRent }) {
+function MortgageCalculator({ price, currency, isRent }) {
   const [down, setDown] = useState(20)
   const [rate, setRate] = useState(5.5)
   const [years, setYears] = useState(25)
@@ -22,12 +22,12 @@ function MortgageCalculator({ price, isRent }) {
       <div className="calc-card">
         <h4><Calculator size={16}/> Rental calculator</h4>
         <div className="calc-row">
-          <span>Monthly rent</span><strong>{formatPrice(price, 'USD')}/mo</strong>
+          <span>Monthly rent</span><strong>{formatPrice(price, currency)}/mo</strong>
         </div>
         <div className="calc-row">
-          <span>Annual rent</span><strong>{formatPrice(annual, 'USD')}/yr</strong>
+          <span>Annual rent</span><strong>{formatPrice(annual, currency)}/yr</strong>
         </div>
-        <div className="calc-note"><Info size={12}/> Estimate only — no payment collected. Enquire for lease terms.</div>
+        <div className="calc-note"><Info size={12}/> Estimate only — no payment collected. Enquire for lease terms. Displayed in {currency} without conversion.</div>
       </div>
     )
   }
@@ -37,11 +37,11 @@ function MortgageCalculator({ price, isRent }) {
   const monthly = monthlyRate===0 ? principal/n : principal * monthlyRate * Math.pow(1+monthlyRate,n) / (Math.pow(1+monthlyRate,n)-1)
   return (
     <div className="calc-card">
-      <h4><Calculator size={16}/> Mortgage estimator (USD)</h4>
+      <h4><Calculator size={16}/> Mortgage estimator ({currency})</h4>
       <div className="calc-grid">
         <label>
           <span>Price</span>
-          <div className="calc-value">{formatPrice(price, 'USD')}</div>
+          <div className="calc-value">{formatPrice(price, currency)}</div>
         </label>
         <label>
           <span>Down payment {down}%</span>
@@ -58,9 +58,9 @@ function MortgageCalculator({ price, isRent }) {
       </div>
       <div className="calc-result">
         <span>Est. monthly</span>
-        <strong>{formatPrice(Math.round(monthly), 'USD')}/mo</strong>
+        <strong>{formatPrice(Math.round(monthly), currency)}/mo</strong>
       </div>
-      <div className="calc-note"><Info size={12}/> Informational only — not a loan offer. No checkout or payment on VEYORA. Use real lender for approval.</div>
+      <div className="calc-note"><Info size={12}/> Informational only — not a loan offer. No checkout or payment on VEYORA. Use real lender for approval. Estimates use listed {currency} price without currency conversion.</div>
     </div>
   )
 }
@@ -124,7 +124,7 @@ export default function PropertyDetails() {
           <div className="details-price">
             <div className="price-value">{formatPrice(property.price, property.currency)} {isRent && <span style={{fontSize:13, fontWeight:500, color:'var(--color-muted)'}}>/ month</span>}</div>
             <div className="price-sub">{property.propertyType} · {property.bedrooms} bd · {property.bathrooms} ba · {property.areaSqm} m²</div>
-            <div className="price-note"><ShieldCheck size={12}/> All prices in USD ($)</div>
+            <div className="price-note"><ShieldCheck size={12}/> Priced in {property.currency} · no conversion</div>
           </div>
         </div>
 
@@ -144,7 +144,7 @@ export default function PropertyDetails() {
             <div className="details-section">
               <h2 className="heading-serif">About this property</h2>
               <p className="lead">{property.description}</p>
-              <div className="sample-notice"><span><strong>Sample listing:</strong> This description and imagery are for demonstration. Not a verified live listing. All prices displayed in USD per your request.</span></div>
+              <div className="sample-notice" style={{background:'#E6F4EA', borderColor:'#A7D4B4', color:'#1A6B4A'}}><span><strong>For viewing:</strong> Enquire via WhatsApp <strong>+234 913 279 8151</strong> to schedule a viewing. Price in {property.currency} · no conversion.</span></div>
             </div>
 
             {/* Rich specs table */}
@@ -158,7 +158,7 @@ export default function PropertyDetails() {
                 <div className="specs-row"><span>Furnishing</span><strong style={{textTransform:'capitalize'}}>{property.furnishing}</strong></div>
                 <div className="specs-row"><span>Year built</span><strong>{property.yearBuilt}</strong></div>
                 <div className="specs-row"><span>Availability</span><strong style={{textTransform:'capitalize'}}>{property.availability}</strong></div>
-                <div className="specs-row"><span>Price</span><strong>{formatPrice(property.price, 'USD')} {isRent?'/ month':''} — USD</strong></div>
+                <div className="specs-row"><span>Price</span><strong>{formatPrice(property.price, property.currency)} {isRent?'/ month':''} — {property.currency}</strong></div>
               </div>
             </div>
 
@@ -189,7 +189,7 @@ export default function PropertyDetails() {
                     <div className="fp-room outdoor"><span>Outdoor</span><small>Terrace / Garden</small></div>
                     <div className="fp-room other"><span>Other</span><small>{property.areaSqm} m² total</small></div>
                   </div>
-                  <div className="floorplan-note">Illustrative — not to scale. Exact plan available on request via enquiry.</div>
+                  <div className="floorplan-note">Illustrative floorplan — not to scale and not a supplied architectural drawing. Exact plan available only if owner provides it; enquire for details.</div>
                 </div>
                 <div className="floorplan-meta">
                   <div><strong>{property.areaSqm} m²</strong><span>Total area</span></div>
@@ -199,20 +199,20 @@ export default function PropertyDetails() {
               </div>
             </div>
 
-            {/* Virtual tour */}
+            {/* Virtual tour — only if assets connected; currently illustrative */}
             <div className="details-section">
               <h3><Video size={16} style={{display:'inline', marginRight:6}}/> Virtual tour</h3>
               <div className="tour-card">
                 <div className="tour-placeholder">
                   <Video size={28}/>
-                  <strong>Virtual tour ready on request</strong>
-                  <span>360° walkthrough + video tour available via WhatsApp or viewing. No booking payment — just enquire.</span>
-                  <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">Request tour link</a>
+                  <strong>Virtual tour — not yet connected</strong>
+                  <span>360° tours appear here when supplied by the owner. Enquire on WhatsApp +234 913 279 8151 to ask about a video tour for this viewing.</span>
+                  <span style={{fontSize:11, opacity:0.8, marginTop:6}}>No video asset connected — this is an illustrative placeholder, not an available tour.</span>
                 </div>
                 <div className="tour-meta">
-                  <span><ShieldCheck size={12}/> No payment needed</span>
+                  <span><ShieldCheck size={12}/> Tours only when supplied</span>
                   <span>•</span>
-                  <span>Guided by VEYORA team</span>
+                  <span>Enquire for availability</span>
                 </div>
               </div>
             </div>
@@ -265,16 +265,16 @@ export default function PropertyDetails() {
           <aside className="details-side">
             <div className="enquiry-card">
               <h3>Enquire about this home</h3>
-              <p>Reference <strong>{property.id}</strong> — {formatPrice(property.price, 'USD')} {isRent?'/mo':''} · {property.location.city}. Our team will respond about availability, viewings and next steps.</p>
+              <p>Reference <strong>{property.id}</strong> — {formatPrice(property.price, property.currency)} {isRent?'/mo':''} · {property.location.city}. Our team will respond about availability, viewings and next steps.</p>
               <div className="enquiry-actions">
                 <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{width:'100%'}}><MessageCircle size={16}/> WhatsApp enquiry</a>
                 {telLink ? <a href={telLink} className="btn btn-outline" style={{width:'100%'}}><Phone size={16}/> Call {contactConfig.phoneDisplay}</a> : <div className="placeholder-line"><Phone size={14}/> Phone not configured — see contact settings</div>}
                 {mailLink ? <a href={mailLink} className="btn btn-outline" style={{width:'100%'}}><Mail size={16}/> Email enquiry</a> : <div className="placeholder-line"><Mail size={14}/> Email not configured — see contact settings</div>}
               </div>
-              <div className="sample-notice" style={{marginTop:12, fontSize:12}}><strong>No payments:</strong> VEYORA never collects payment on this site. Enquiries only. All prices in USD ($).</div>
+              <div className="sample-notice" style={{marginTop:12, fontSize:12}}><strong>No payments:</strong> VEYORA never collects payment on this site. Enquiries only. Price in {property.currency}.</div>
             </div>
 
-            <MortgageCalculator price={property.price} isRent={isRent} />
+            <MortgageCalculator price={property.price} currency={property.currency} isRent={isRent} />
 
             <ContactForm property={property} />
           </aside>

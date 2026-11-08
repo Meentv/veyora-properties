@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, ShieldCheck, Globe, Award, Search, Building2, Home as HomeIcon, Landmark, Waves, Store } from 'lucide-react'
-import { properties, getFeatured } from '../data/properties'
-import PropertyCard from '../components/PropertyCard'
+import { properties, getFeatured, getPropertyById } from '../data/properties'
+import PropertySlider from '../components/PropertySlider'
 import SearchBar from '../components/SearchBar'
 import { useState } from 'react'
 import { formatPrice } from '../utils/formatPrice'
@@ -18,6 +18,8 @@ export default function Home() {
     e.preventDefault()
     if (q.trim()) navigate(`/properties?search=${encodeURIComponent(q.trim())}`)
   }
+
+  const heroProperty = getPropertyById('VEY-001')
 
   const categories = [
     { icon: Building2, label:'Apartments', type:'apartment', count: properties.filter(p=>p.propertyType==='apartment').length },
@@ -44,28 +46,28 @@ export default function Home() {
             </form>
 
             <div className="hero-meta">
-              <span><strong>20</strong> sample listings</span>
+              <span><strong>20</strong> curated listings</span>
               <span>·</span>
               <span>5 currencies</span>
               <span>·</span>
-              <span>No payment required</span>
+              <span>Viewing & WhatsApp enquiries</span>
             </div>
 
-            <div className="sample-notice" style={{marginTop:16}}>
+            <div className="sample-notice" style={{marginTop:16, background:'#E6F4EA', borderColor:'#A7D4B4', color:'#1A6B4A'}}>
               <ShieldCheck size={16} style={{flex:'none', marginTop:2}}/>
-              <span><strong>Sample catalogue:</strong> All listings are demonstration content. Configure <code>src/data/properties.js</code> and <code>contactConfig.js</code> with real inventory when ready.</span>
+              <span><strong>Live enquiries:</strong> Browse 20 curated homes. Tap <strong>WhatsApp</strong> on any card or detail page to chat directly on <strong>+234 913 279 8151</strong> — viewings by appointment.</span>
             </div>
           </div>
 
           <div className="hero-visual">
             <div className="hero-image-card">
-              <img src="/images/properties/vey-001/exterior.jpg" alt="Contemporary Garden Villa — featured" width={640} height={480} onError={e=>e.currentTarget.style.display='none'} />
+              <img src={heroProperty.images[0]} alt={`${heroProperty.title} — featured`} width={640} height={480} onError={e=>e.currentTarget.style.display='none'} />
               <div className="hero-image-overlay">
                 <div className="overlay-card">
-                  <div className="overlay-eyebrow">Featured — Dubai Hills</div>
-                  <div className="overlay-title">Contemporary Garden Villa</div>
-                  <div className="overlay-price">{formatPrice(4850000,'AED')} · For Sale</div>
-                  <Link to="/properties/VEY-001" className="btn btn-white btn-sm">View Details <ArrowRight size={14}/></Link>
+                  <div className="overlay-eyebrow">Featured — {heroProperty.location.area}</div>
+                  <div className="overlay-title">{heroProperty.title}</div>
+                  <div className="overlay-price">{formatPrice(heroProperty.price, heroProperty.currency)} · {heroProperty.listingType === 'sale' ? 'For Sale' : 'For Rent'}</div>
+                  <Link to={`/properties/${heroProperty.id}`} className="btn btn-white btn-sm">View Details <ArrowRight size={14}/></Link>
                 </div>
               </div>
             </div>
@@ -97,19 +99,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED */}
+      {/* FEATURED SLIDER */}
       <section className="section">
         <div className="container">
           <div className="section-head">
             <div>
-              <div className="eyebrow">CURATED SELECTION</div>
+              <div className="eyebrow">CURATED SELECTION — SLIDE TO EXPLORE</div>
               <h2 className="heading-serif">Featured properties</h2>
+              <p style={{fontSize:13, color:'var(--color-muted)', margin:'6px 0 0'}}>Swipe or use arrows to slide through featured homes. All 20 are also in the 5×4 catalogue below.</p>
             </div>
             <Link to="/properties" className="btn btn-primary btn-sm">Explore catalogue</Link>
           </div>
-          <div className="properties-grid">
-            {featured.map(p => <PropertyCard key={p.id} property={p} />)}
+          <PropertySlider properties={featured} title="Featured — slide through" />
+        </div>
+      </section>
+
+      {/* ALL PROPERTIES SLIDER — viewers can slide through all 20 */}
+      <section className="section section-light">
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <div className="eyebrow">ALL 20 — SLIDE THROUGH</div>
+              <h2 className="heading-serif">Slide through all properties</h2>
+              <p style={{fontSize:13, color:'var(--color-muted)', margin:'6px 0 0'}}>Horizontal slide with touch swipe + arrow controls. Prefer grid? <Link to="/properties" style={{fontWeight:600, color:'var(--color-forest)'}}>Open grid view</Link></p>
+            </div>
           </div>
+          <PropertySlider properties={properties} title="All 20 properties — slide" autoPlay={false} />
         </div>
       </section>
 

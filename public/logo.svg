@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" width="360" height="80">
+  <rect width="360" height="80" rx="12" fill="#182A2A"/>
+  <g transform="translate(16,16)">
+    <rect width="48" height="48" rx="10" fill="#1E3636" stroke="#2D4A4A" stroke-width="1.2"/>
+    <text x="24" y="32" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="28" font-weight="700" fill="#B89A62">V</text>
+  </g>
+  <text x="78" y="32" font-family="Playfair Display, Georgia, serif" font-size="22" font-weight="700" fill="#FFFFFF" letter-spacing="0.08em">VEYORA</text>
+  <text x="78" y="50" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#B9C7C5" letter-spacing="0.38em">PROPERTIES</text>
+  <text x="78" y="64" font-family="Inter, sans-serif" font-size="9" font-weight="500" fill="#8EA6A3" letter-spacing="0.12em">A better place to belong.</text>
+</svg>

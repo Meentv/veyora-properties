@@ -7,15 +7,12 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <div className="footer-logo">
-            <span className="footer-mark">V</span>
-            <span className="footer-name">VEYORA<br/>PROPERTIES</span>
-          </div>
+          <img src="/logo.svg" alt="VEYORA Properties" width="180" height="40" className="footer-logo-img" />
           <p className="footer-tagline">A better place to belong.</p>
           <p className="footer-desc">
-            Premium international real estate discovery — browse curated listings, compare and enquire directly. Sample catalogue for demonstration.
+            Premium international real estate for viewing — browse curated listings, compare and enquire directly via WhatsApp. Viewing & enquiries: +234 913 279 8151.
           </p>
-          <div className="footer-legal">© {new Date().getFullYear()} VEYORA Properties. All rights reserved. Sample listings — not verified real inventory.</div>
+          <div className="footer-legal">© {new Date().getFullYear()} VEYORA Properties. All rights reserved. Contact for viewings via WhatsApp.</div>
         </div>
 
         <div className="footer-col">
@@ -57,15 +54,7 @@ export default function Footer() {
         }
         .footer-grid { padding-bottom: 8px; }
         .footer-brand { max-width: 420px; }
-        .footer-logo { display:flex; gap:12px; align-items:center; }
-        .footer-mark {
-          width:44px; height:44px; border-radius:10px;
-          background: #203232; color: var(--color-gold);
-          display:grid; place-items:center;
-          font-family: var(--font-serif); font-weight:700; font-size:20px;
-          border:1px solid #2d4a4a;
-        }
-        .footer-name { font-family: var(--font-serif); font-size:15px; line-height:1; letter-spacing:0.08em; color:white; font-weight:700; }
+        .footer-logo-img { height:40px; width:auto; display:block; background: white; border-radius:8px; padding:4px 8px; }
         .footer-tagline { color: var(--color-gold); font-family: var(--font-serif); margin:12px 0 8px; font-size:15px; }
         .footer-desc { color:#b9c7c5; font-size:13px; line-height:1.7; margin:0; }
         .footer-legal { margin-top:16px; font-size:11px; color:#8ea6a3; line-height:1.5; }

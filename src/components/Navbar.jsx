@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Menu, X, Heart, Scale, Search, Phone, Mail } from 'lucide-react'
+import { Menu, X, Heart, Scale, Search, Phone, Mail, Sun, Moon } from 'lucide-react'
 import { useFavorites } from '../context/FavoritesContext'
 import { useCompare } from '../context/CompareContext'
+import { useTheme } from '../context/ThemeContext'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { count: favCount } = useFavorites()
   const { count: compareCount } = useCompare()
+  const { theme, toggle } = useTheme()
   const navigate = useNavigate()
 
   const linkClass = ({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'
@@ -16,11 +18,7 @@ export default function Navbar() {
     <header className="navbar">
       <div className="container navbar-inner">
         <Link to="/" className="brand" aria-label="VEYORA Properties home">
-          <div className="brand-mark">V</div>
-          <div className="brand-text">
-            <span className="brand-name">VEYORA</span>
-            <span className="brand-sub">PROPERTIES</span>
-          </div>
+          <img src="/logo.svg" alt="VEYORA Properties" width="160" height="36" className="brand-logo" />
         </Link>
 
         <nav className="nav-links" aria-label="Primary">
@@ -32,6 +30,9 @@ export default function Navbar() {
         </nav>
 
         <div className="nav-actions-desktop">
+          <button className="icon-btn" onClick={toggle} aria-label={`Switch to ${theme==='light'?'dark':'light'} mode`}>
+            {theme==='light' ? <Moon size={16}/> : <Sun size={16}/>}
+          </button>
           <button className="icon-btn" onClick={() => navigate('/favorites')} aria-label={`Favourites, ${favCount} saved`}>
             <Heart size={18} className={favCount ? 'filled' : ''} />
             {favCount > 0 && <span className="badge-count">{favCount}</span>}
@@ -60,6 +61,7 @@ export default function Navbar() {
               <Link to="/favorites" onClick={() => setOpen(false)} className="btn btn-outline" style={{width:'100%'}}><Heart size={16}/> Favourites {favCount?`(${favCount})`:''}</Link>
               <Link to="/contact" onClick={() => setOpen(false)} className="btn btn-primary" style={{width:'100%'}}>Enquire</Link>
             </div>
+            <button onClick={toggle} className="btn btn-outline theme-toggle-mobile">{theme==='light' ? <Moon size={14}/> : <Sun size={14}/>} {theme==='light' ? 'Dark mode' : 'Light mode'} (auto day/night)</button>
             <div className="mobile-contact">
               <span><Mail size={14}/> Email via contact form</span>
               <span><Phone size={14}/> WhatsApp via property pages</span>
@@ -71,7 +73,7 @@ export default function Navbar() {
       <style>{`
         .navbar {
           position: sticky; top:0; z-index:40;
-          background: rgba(255,255,255,0.96);
+          background: var(--color-nav);
           backdrop-filter: blur(10px);
           border-bottom: 1px solid var(--color-border);
         }
@@ -79,16 +81,8 @@ export default function Navbar() {
           display:flex; align-items:center; justify-content:space-between;
           gap:16px; height:68px;
         }
-        .brand { display:flex; align-items:center; gap:12px; }
-        .brand-mark {
-          width:40px; height:40px; border-radius:10px;
-          background: var(--color-forest); color: var(--color-gold);
-          display:grid; place-items:center;
-          font-family: var(--font-serif); font-weight:700; font-size:20px;
-        }
-        .brand-text { display:flex; flex-direction:column; line-height:1; }
-        .brand-name { font-family: var(--font-serif); font-weight:700; letter-spacing:0.08em; font-size:17px; color:var(--color-forest); }
-        .brand-sub { font-size:10px; letter-spacing:0.22em; color: var(--color-muted); font-weight:600; margin-top:2px; }
+        .brand { display:flex; align-items:center; }
+        .brand-logo { height:36px; width:auto; display:block; }
 
         .nav-links { gap:22px; align-items:center; }
         .nav-link { font-size:14px; font-weight:500; color: var(--color-charcoal); padding:6px 2px; position:relative; }
@@ -101,7 +95,7 @@ export default function Navbar() {
           position:relative;
           width:38px; height:38px; border-radius: 999px;
           border:1px solid var(--color-border);
-          background: var(--color-white);
+          background: var(--color-card);
           display:grid; place-items:center;
           cursor:pointer; color: var(--color-forest);
         }
@@ -117,9 +111,10 @@ export default function Navbar() {
 
         .mobile-drawer {
           border-top:1px solid var(--color-border);
-          background: var(--color-white);
+          background: var(--color-card);
           padding: 16px 0 20px;
         }
+        .mobile-drawer .theme-toggle-mobile { margin-top:10px; width:100%; justify-content:center; }
         .mobile-drawer-inner { display:flex; flex-direction:column; gap:12px; }
         .mobile-drawer-inner a { padding:10px 0; font-weight:500; border-bottom:1px solid #f0ece3; }
         .mobile-actions { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px; }
